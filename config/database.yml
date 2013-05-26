@@ -1,19 +1,19 @@
 development:
-  adapter: pg
+  adapter: mysql2
   database: ShopulseBeta
   pool: 5
   timeout: 5000
   username: root
 
 production:
-  adapter: pg
+  adapter: mysql2
   database: ShopulseBeta
   pool: 5
   timeout: 5000
   username: root
 
 test:
-  adapter: pg
+  adapter: mysql2
   database: ShopulseBetaTest
   pool: 5
   timeout: 5000
