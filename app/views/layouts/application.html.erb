@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ShopulseBeta</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= stylesheet_link_tag "scaffolds" %>
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container" style='width: 900px; height: 72px'>				
+				<a class="brand" href="/">
+					<%= image_tag "logo.png", :width => '125px' %>
+				</a>
+				<div class="nav-collapse collapse" style='float: right'>
+					<ul class="nav">
+						<% if user_signed_in? %>
+							<li><a href="#">Home</a></li>							
+						<% end %>
+
+						<li>
+							<%= link_to "About", :controller => "registrations", :action => "index" %>
+						</li>
+						<li>
+							<%= link_to "Contact", :controller => "registrations", :action => "index" %>
+						</li>
+
+						<% if user_signed_in? == false %>
+							<li>
+								<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
+							</li>
+						<% else %>
+							<li><%= link_to "Log Out", :controller => "sessions", :action => "destroy" %></li>
+						<% end %> 
+					</ul>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<%= yield %>
+	</div>
+</body>
+</html>

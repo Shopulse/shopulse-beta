@@ -1,0 +1,6 @@
+#new_product .row-fluid
+{
+	border-bottom: 1px solid lightgrey;
+	padding-bottom: 10px;
+	padding-top: 20px;
+}

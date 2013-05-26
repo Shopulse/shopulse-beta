@@ -1,0 +1,34 @@
+
+<%= stylesheet_link_tag 'sessions/create' %>
+<%= javascript_include_tag 'registrations/create' %>
+
+<table width="100%" height="70%">
+	<tr>
+		<td>
+			<div id='login_form' height="100%" width='100%'>
+				<h2>Sign up</h2>
+				<%= form_for resource, :as => resource_name, :url => {:controller => "registrations", :action => "create"}, 
+					:method => 'POST' do |f| %>
+				<div>
+					<%= f.label :email %>
+					<%= f.email_field :email, :autofocus => true, :placeholder => 'me@address.com', :required => true %>
+				</div>
+
+				<div>
+					<%= f.label :password %>
+					<%= f.password_field :password, :placeholder => 'password [min length=7]', :pattern => ".{7,20}" , :required => true %>
+				</div>
+
+				<div>
+					<%= f.label :password_confirmation %>
+					<%= f.password_field :password_confirmation, :placeholder => 'confirm password', :pattern => ".{7,20}" , :required => true %>					
+				</div>
+
+				<div>
+					<%= f.submit "Sign Up", :class => 'btn btn-danger', :id => 'login_button' %>
+				</div>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+</table>
