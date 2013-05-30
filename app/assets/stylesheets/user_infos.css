@@ -1,0 +1,29 @@
+.panel
+{
+	margin: 5% auto; 
+	display: block;
+	border-radius: 10px;
+	padding: 20px 50px;
+	background-color: rgba(255, 255, 255, 0.8);
+	width: 500px;
+}
+
+#notice
+{
+	margin: 0% auto;
+	margin-top: 50px;
+	text-align: center;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+#info_form
+{	
+	
+}
+
+#info_form .btn
+{
+	width: 100px;
+}

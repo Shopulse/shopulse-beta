@@ -7,6 +7,7 @@
 	<%= stylesheet_link_tag "scaffolds" %>
 	<%= csrf_meta_tags %>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="<%= asset_path 'favicon.ico' %>">
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,21 +19,22 @@
 				<div class="nav-collapse collapse" style='float: right'>
 					<ul class="nav">
 						<% if user_signed_in? %>
-							<li><a href="#">Home</a></li>							
+							<li><a href="/">Home</a></li>							
 						<% end %>
 
-						<li>
+						<!-- <li>
 							<%= link_to "About", :controller => "registrations", :action => "index" %>
 						</li>
 						<li>
 							<%= link_to "Contact", :controller => "registrations", :action => "index" %>
-						</li>
+						</li> -->
 
 						<% if user_signed_in? == false %>
 							<li>
 								<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
 							</li>
 						<% else %>
+							<li><%= link_to "Profile", :controller => "UserInfos", :action => "edit_profile" %></li>
 							<li><%= link_to "Log Out", :controller => "sessions", :action => "destroy" %></li>
 						<% end %> 
 					</ul>					

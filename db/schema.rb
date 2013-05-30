@@ -11,28 +11,41 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525224607) do
+ActiveRecord::Schema.define(:version => 20130529162753) do
 
   create_table "products", :force => true do |t|
     t.integer  "user_info_id"
     t.string   "name"
-    t.decimal  "price",        :precision => 10, :scale => 0
-    t.decimal  "sale_price",   :precision => 10, :scale => 0
+    t.decimal  "price",               :precision => 10, :scale => 0
+    t.decimal  "sale_price",          :precision => 10, :scale => 0
     t.string   "brand"
     t.text     "description"
     t.text     "material"
     t.string   "sizes"
-    t.text     "images"
     t.string   "gender"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "images_file_name"
+    t.string   "images_content_type"
+    t.integer  "images_file_size"
+    t.datetime "images_updated_at"
   end
 
   create_table "user_infos", :force => true do |t|
     t.integer  "user_id"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "province"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "phone"
+    t.boolean  "admin"
   end
 
   create_table "users", :force => true do |t|

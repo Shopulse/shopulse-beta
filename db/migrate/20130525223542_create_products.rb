@@ -9,10 +9,9 @@ class CreateProducts < ActiveRecord::Migration
       t.text :description
       t.text :material
       t.string :sizes
-      t.text :images
       t.string :gender
-
       t.timestamps
     end
+    add_attachment :products, :images
   end
 end

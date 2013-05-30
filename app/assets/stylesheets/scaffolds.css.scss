@@ -1,6 +1,7 @@
+
 .navbar-inverse .navbar-inner
 {
-  background-color: #CCCCCC;  
+  /*background-color: #CCCCCC;  
   background-image: -moz-linear-gradient(to bottom, #ffffff, #f2f2f2);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#CCCCCC), to(#FFFFFF));
   background-image: -webkit-linear-gradient(to bottom, #ffffff, #f2f2f2);
@@ -8,6 +9,10 @@
   background-image: linear-gradient(to bottom, #ffffff, #f2f2f2);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+  border-color: #CCCCCC;*/
+  background-color: white;  
+  background-image: none;  
+  background-repeat: repeat-x;
   border-color: #CCCCCC;
 }
 
@@ -17,7 +22,7 @@ body {
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-  line-height: 18px;  
+  line-height: 18px;
 }
 
 p, ol, ul, td {

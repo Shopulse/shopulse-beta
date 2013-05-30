@@ -2,7 +2,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    user = current_user.user_info
+    @products = user.products
+    if user.admin
+      @products = Product.all 
+      @admin = true
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,9 +17,10 @@ class ProductsController < ApplicationController
 
   # GET /products/1
   # GET /products/1.json
-  def show
-    @product = Product.find(params[:id])
-
+  def show    
+    user = current_user.user_info
+    @product = user.products.find(params[:id]) if !user.admin
+    @product = Product.find(params[:id]) if user.admin    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @product }
@@ -25,7 +31,6 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -33,17 +38,17 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-    @product = Product.find(params[:id])
+  def edit    
+    @product = current_user.user_info.products.find(params[:id])
   end
 
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-
     respond_to do |format|
       if @product.save
+        current_user.user_info.products.push @product
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -56,8 +61,7 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.json
   def update
-    @product = Product.find(params[:id])
-
+    @product = current_user.user_info.products.find(params[:id])
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -72,12 +76,20 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product = Product.find(params[:id])
+    @product = current_user.user_info.products.find(params[:id])
     @product.destroy
-
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
+  end
+
+  def retailer
+    user = current_user.user_info
+    redirect_to "/" if !user.admin
+
+    @products = UserInfo.find(params[:id]).products
+    @admin = true
+    render :action => "index"
   end
 end

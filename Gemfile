@@ -2,8 +2,13 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-# gem 'mysql2'
-gem 'pg'
+group :development do
+	gem 'mysql2'
+end
+
+group :production do
+	gem 'pg'
+end
 
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
@@ -19,3 +24,7 @@ gem 'devise'
 
 gem 'therubyracer'
 gem "less-rails"
+
+#Amazon
+gem 'paperclip'
+gem 'aws-sdk'

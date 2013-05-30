@@ -10,6 +10,7 @@
  *
  *= require_self
  * require_tree .
+ *= require layout
  *= require bootstrap_and_overrides
  *= require jquery.ui.core
  *= require jquery.ui.theme

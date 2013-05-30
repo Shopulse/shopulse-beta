@@ -1,11 +1,17 @@
 <%- model_class = Product -%>
-<div class="page-header">
+
+<!-- <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
+</div> -->
+<br><br>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
+      <% if @admin == true %>
+        <th>Retailer</th>
+      <% end %>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:sale_price) %></th>
@@ -22,8 +28,13 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= link_to product.id, product_path(product) %></td>
-        <td><%= product.name %></td>
+        <% if @admin %>
+          <% 
+            retailer = UserInfo.find(product.user_info_id)
+          %>
+          <td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
+        <% end %>
+        <td><%= link_to product.name, product_path(product) %></td>
         <td><%= product.price %></td>
         <td><%= product.sale_price %></td>
         <td><%= product.brand %></td>
@@ -46,7 +57,6 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_product_path,
-            :class => 'btn btn-primary' %>
+<p style='text-align:right'>
+<%= link_to t('.new', :default => t("helpers.links.new")), new_product_path, :class => 'btn btn-primary' %>
+</p>

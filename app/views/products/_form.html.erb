@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'product/new' %>
 <%= stylesheet_link_tag "product/new" %>
 
-<%= form_for @product, :html => { :class => 'form-horizontal', :onsubmit => 'submit();'} do |f| %> 
+<%= form_for @product, :html => { :class => 'form-horizontal', :onkeypress => "return event.keyCode != 13;"} do |f| %> 
 <div class="span6">
 
   <div class="row-fluid">
@@ -29,7 +29,7 @@
     <div class="control-group" style='float: right'>
       <%= f.label :images, :class => 'control-label' %>
       <div class="controls">
-        <%= f.file_field :images, :multiple => 'true', :onchange => 'fileList()' %>
+        <%= f.file_field :images, :onchange => 'fileList()' %>  <!-- :multiple => 'true' -->
         <table class='table' id='file_list' style="width: 220px;">
           <tr>
             <td>#</td>
@@ -66,21 +66,21 @@
         <div class="controls">
           <%= f.hidden_field :gender %>
           <div id='gender_checkbox' class="btn-group" data-toggle="buttons-checkbox">
-            <button type="button" class="btn" id='men' onclick='gender_select()'>Men</button>
-            <button type="button" class="btn" id='women' onclick='gender_select()'>Women</button>
+            <button type="button" class="btn" id='men'>Men</button>
+            <button type="button" class="btn" id='women'>Women</button>
           </div>
         </div>
       </div>
-      <div class="control-group">
+      <!-- <div class="control-group">
         <%= f.label :material, :class => 'control-label' %>
         <div class="controls">
           <%= f.text_field :material, :class => 'text_field', :rows => 1, :placeholder => 'split by comma', :required => true %>
         </div>
-      </div>
+      </div> -->
       <div class="control-group">
         <label class='control-label'>Available Sizes</label>
         <div class="controls">
-          <%= f.hidden_field :sizes, :required => true %>    
+          <%= f.hidden_field :sizes, :required => true %>
           <div class="input-append">
             <input id='size_list' type='text' class='text_field span11' placeholder="XS, M, L, 7, 9.5" onchange="size_list_change()" />
             <button class="btn" type="button" onclick="size_list_change()"><i class="icon-arrow-down"></i></button>
@@ -94,7 +94,7 @@
             <tr>
               <td>Size</td>
               <td>Quantity</td>
-            </tr>            
+            </tr>
           </table>
         </div>
       </div>
@@ -102,7 +102,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <button class='btn btn-primary' onclick="form_submit()">Update Product</button>
+    <!-- <%= f.submit nil, :class => 'btn btn-primary', "onclick" => "form_submit()" %> -->
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
     products_path, :class => 'btn' %>
   </div>

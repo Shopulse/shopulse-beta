@@ -1,0 +1,61 @@
+<%= stylesheet_link_tag "user_infos" %>
+
+<% if params["notice"] %>
+<div class='panel' id='notice'>
+	<%= params["notice"] %>
+</div>
+<% end %>
+<div id='info_form' class='panel'>
+	<center>
+		<h2>Edit Profile</h2>
+	</center>
+	<%= form_for @user_info, :url => { :controller => 'UserInfos', :action => 'update' }, :method => 'POST' do |f| %>
+	<div class='row-fluid'>
+		<div class='span5'>
+			<div>
+				<%= f.label :name %>
+				<%= f.text_field :name, :autofocus => true, :placeholder => 'Retailer Name', :required => true %>
+			</div>
+			<div>
+				<%= f.label :first_name %>
+				<%= f.text_field :first_name, :autofocus => true, :placeholder => 'Owner First Name', :required => true %>
+			</div>
+			<div>
+				<%= f.label :last_name %>
+				<%= f.text_field :last_name, :autofocus => true, :placeholder => 'Owner Last Name', :required => true %>
+			</div>
+			<div>
+				<%= f.label :phone %>
+				<%= f.text_field :phone, :autofocus => true, :placeholder => 'Phone', :required => true %>
+			</div>
+		</div>
+		<div class='span2'></div>
+		<div class='span5'>
+			<div>
+				<%= f.label :address %>
+				<%= f.text_field :address, :autofocus => true, :placeholder => 'Address', :required => true %>
+			</div>
+			<div>
+				<%= f.label :city %>
+				<%= f.text_field :city, :autofocus => true, :placeholder => 'City', :required => true %>
+			</div>
+			<div>
+				<%= f.label :province %>
+				<%= f.text_field :province, :autofocus => true, :placeholder => 'Province', :required => true %>
+			</div>
+			<div>
+				<%= f.label :country %>
+				<%= f.text_field :country, :autofocus => true, :placeholder => 'Country', :required => true %>
+			</div>
+			<div>
+				<%= f.label :postal_code %>
+				<%= f.text_field :postal_code, :autofocus => true, :placeholder => 'Postal Code', :required => true %>
+			</div>
+		</div>
+	</div>
+	<br>
+	<center>
+		<%= f.submit "Update", :class => 'btn btn-primary', :id => 'login_button' %>
+	</center>
+	<% end %>
+</div>
