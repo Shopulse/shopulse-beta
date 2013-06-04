@@ -1,25 +1,10 @@
 function fileList()
 {
-	table = $('#file_list tr');
-	for(i=1 ; i<table.length ; i++)
+	for(i=0 ; i<5 ; i++)
 	{
-		$(table[i]).remove();
-	}
-
-	table = $('#file_list');
-	files = $('#product_images').prop("files");
-	if(files.length > 5)
-	{
-		alert("You could only upload 5 images.");
-		$('#product_images').val("");
-		files = [];
-	}
-
-	for (i = 0 ; i < files.length ; i++) 
-	{
-		str = "<tr><td><b>" + (i+1) + "</b></td><td>" + files[i].name + "</td></tr>",
-		html = $.parseHTML(str);
-		table = table.append(html);
+		obj = $('#product_photos_attributes_'+i+'_id');
+		if(obj.length != 0)
+			$('#product_photos_attributes_'+i+'_photo')[0].type = 'hidden';
 	}
 }
 

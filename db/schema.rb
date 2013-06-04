@@ -11,24 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529162753) do
+ActiveRecord::Schema.define(:version => 20130602210947) do
+
+  create_table "photos", :force => true do |t|
+    t.integer  "product_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "products", :force => true do |t|
     t.integer  "user_info_id"
     t.string   "name"
-    t.decimal  "price",               :precision => 10, :scale => 0
-    t.decimal  "sale_price",          :precision => 10, :scale => 0
+    t.decimal  "price",        :precision => 10, :scale => 0
+    t.decimal  "sale_price",   :precision => 10, :scale => 0
     t.string   "brand"
     t.text     "description"
     t.text     "material"
     t.string   "sizes"
     t.string   "gender"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.string   "images_file_name"
-    t.string   "images_content_type"
-    t.integer  "images_file_size"
-    t.datetime "images_updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   create_table "user_infos", :force => true do |t|

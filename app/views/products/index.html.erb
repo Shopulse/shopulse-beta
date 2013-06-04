@@ -8,7 +8,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <!-- <th><%= model_class.human_attribute_name(:id) %></th> -->
       <% if @admin == true %>
         <th>Retailer</th>
       <% end %>
@@ -16,10 +15,7 @@
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:sale_price) %></th>
       <th><%= model_class.human_attribute_name(:brand) %></th>
-      <!-- <th><%= model_class.human_attribute_name(:description) %></th> -->
       <th><%= model_class.human_attribute_name(:material) %></th>
-      <!-- <th><%= model_class.human_attribute_name(:sizes) %></th> -->
-      <!-- <th><%= model_class.human_attribute_name(:images) %></th> -->
       <th><%= model_class.human_attribute_name(:gender) %></th>
       <!-- <th><%= model_class.human_attribute_name(:created_at) %></th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -38,10 +34,7 @@
         <td><%= product.price %></td>
         <td><%= product.sale_price %></td>
         <td><%= product.brand %></td>
-        <!-- <td><%= product.description %></td> -->
         <td><%= product.material %></td>
-        <!-- <td><%= product.sizes %></td> -->
-        <!-- <td><%= product.images %></td> -->
         <td><%= product.gender %></td>
         <!-- <td><%=l product.created_at %></td> -->
         <td>

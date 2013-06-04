@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
+    (5-@product.photos.count).times { @product.photos.build }
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -40,6 +41,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit    
     @product = current_user.user_info.products.find(params[:id])
+    (5-@product.photos.count).times { @product.photos.build }
   end
 
   # POST /products
@@ -87,7 +89,6 @@ class ProductsController < ApplicationController
   def retailer
     user = current_user.user_info
     redirect_to "/" if !user.admin
-
     @products = UserInfo.find(params[:id]).products
     @admin = true
     render :action => "index"

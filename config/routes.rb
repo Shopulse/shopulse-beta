@@ -7,5 +7,6 @@ ShopulseBeta::Application.routes.draw do
 	
 	root :to => 'products#index'
 	
+
 	match ':controller(/:action(/:id))(.:format)'
 end

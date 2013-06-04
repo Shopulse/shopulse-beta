@@ -2,8 +2,10 @@
 	$(document).ready(function(){
 		json_to_table();
 		set_gender();
+		fileList();
 	});
 </script>
+<%= javascript_include_tag "edit" %>
 
 <%- model_class = Product -%>
 <div class="page-header">

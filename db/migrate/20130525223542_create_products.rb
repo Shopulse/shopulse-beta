@@ -10,8 +10,8 @@ class CreateProducts < ActiveRecord::Migration
       t.text :material
       t.string :sizes
       t.string :gender
+
       t.timestamps
     end
-    add_attachment :products, :images
   end
 end

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	:recoverable, :rememberable, :trackable, :validatable
 
 	attr_accessible :email, :password, :password_confirmation, :remember_me
-	has_one :user_info
+	has_one :user_info	
 
 	after_create :default_create_user_info
 
