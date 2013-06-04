@@ -27,30 +27,27 @@
       </div>
     </div>
     <div class="control-group" style='float: right'>
+      
       <%= f.label :photos, :class => 'control-label' %>      
+      
       <div class="controls">
-        <% f.fields_for :photos do |photo_fields| %>      
-    
-    <% unless photo_fields.object.new_record? %>
-    <div class="thumb">
-      <%= link_to image_tag(photo_fields.object.photo.url(:thumb)), photo_fields.object.photo.url(:original) %>
-      <%= photo_fields.check_box :_destroy %>     
-    </div>  
-    <% end %>
-  
-  <% end %>
         <%= f.fields_for :photos do |p| %>
-          <%= p.file_field :photo %><br>
-        <% end %>        
-        <% f.fields_for :photos do |photo_fields| %>
-          <% if photo_fields.object.new_record? || 1==1%>
+          <% unless p.object.new_record? %>
+            <div class="thumb">
+              <%= link_to image_tag(p.object.photo.url(:thumb)), p.object.photo.url(:original) %>
+              remove? <%= p.check_box :_destroy%> 
+            </div>
+          <% end %>
+        <% end %>
+        <%= f.fields_for :photos do |p| %>
+          <% if p.object.new_record? %>
           <p>
-            <%= photo_fields.file_field :photo %>
+            <%= p.file_field :photo %><br>
           </p>
           <% end %>
         <% end %>
-
       </div>
+
     </div>
   </div>
 

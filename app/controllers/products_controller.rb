@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
-    (5-@product.photos.count).times { @product.photos.build }
+    5.times { @product.photos.build }
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
