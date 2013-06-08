@@ -54,7 +54,7 @@ class ProductsController < ApplicationController
       if @product.save
         current_user.user_info.products.push @product
         Shopify.create @product
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to :action => 'index' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -70,7 +70,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.update_attributes(params[:product])
         Shopify.modify @product
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to :action => 'index' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
