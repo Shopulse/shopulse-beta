@@ -45,7 +45,7 @@ class Shopify
 
 	def self.delete product
 		p = ShopifyAPI::Product.find product.shopify_id
-		p.delete
+		p.destroy
 	end
 
 	private
