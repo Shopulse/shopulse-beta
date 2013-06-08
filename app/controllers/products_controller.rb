@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit    
     @product = current_user.user_info.products.find(params[:id])
-    @product = Product.find(params[:id]) if user.admin    
+    @product = Product.find(params[:id]) if current_user.user_info.admin
     (5-@product.photos.count).times { @product.photos.build }
   end
 
@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = current_user.user_info.products.find(params[:id])
-    @product = Product.find(params[:id]) if user.admin    
+    @product = Product.find(params[:id]) if current_user.user_info.admin    
     respond_to do |format|
       if @product.update_attributes(params[:product])
         Shopify.modify @product
