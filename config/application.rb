@@ -35,5 +35,15 @@ module ShopulseBeta
     config.cache_classes = true   
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]  
+
+    #Paperclip
+    config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'ggmichaelgo',
+      :access_key_id => 'AKIAJ4DCD2FAZNJFIO5A',
+      :secret_access_key => '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'
+    }
+  }
   end
 end

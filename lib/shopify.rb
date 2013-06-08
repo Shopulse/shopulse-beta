@@ -44,6 +44,7 @@ class Shopify
 	end
 
 	private
+
 	def self.create_variant product, vendor
 		inventory = JSON.parse(product.sizes)
 		var_list = []
