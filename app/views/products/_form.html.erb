@@ -20,6 +20,12 @@
         </div>
       </div>
       <div class="control-group">
+        <%= f.label :product_type, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :product_type, :class => 'text_field', :placeholder => 'Product Type: Shirt, Skirt', :required => true %>
+        </div>
+      </div>
+      <div class="control-group">
         <%= f.label :description, :class => 'control-label' %>
         <div class="controls">
           <%= f.text_area :description, :class => 'text_area', :rows => 5, :placeholder => 'Description', :required => true %>

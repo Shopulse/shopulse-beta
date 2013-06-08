@@ -28,3 +28,6 @@ gem "less-rails"
 #Amazon
 gem 'paperclip'
 gem 'aws-sdk'
+
+#Shopify
+gem 'shopify_api'
