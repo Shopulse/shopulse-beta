@@ -19,12 +19,14 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show    
     user = current_user.user_info
-    @product = user.products.find(params[:id]) if !user.admin
-    @product = Product.find(params[:id]) if user.admin    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @product }
-    end
+    product = user.products.find(params[:id]) if !user.admin
+    product = Product.find(params[:id]) if user.admin    
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.json { render json: @product }
+    # end
+    p = ShopifyAPI::Product.find product.shopify_id
+    redirect_to 'http://shopulse.myshopify.com/products/'+p.handle
   end
 
   # GET /products/new
@@ -35,7 +37,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
-    end
+    end    
   end
 
   # GET /products/1/edit
