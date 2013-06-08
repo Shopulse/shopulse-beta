@@ -43,6 +43,11 @@ class Shopify
 		p.save
 	end
 
+	def self.delete product
+		p = ShopifyAPI::Product.find product.shopify_id
+		p.delete
+	end
+
 	private
 
 	def self.create_variant product, vendor

@@ -80,6 +80,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
+    Shopify.delete @product
     @product = current_user.user_info.products.find(params[:id])
     @product.destroy
     respond_to do |format|
