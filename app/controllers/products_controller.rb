@@ -79,9 +79,9 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   # DELETE /products/1.json
-  def destroy
-    Shopify.delete @product
+  def destroy    
     @product = current_user.user_info.products.find(params[:id])
+    Shopify.delete @product
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url }
