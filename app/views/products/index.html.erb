@@ -30,7 +30,7 @@
           %>
           <td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
         <% end %>
-        <td><%= link_to product.name, product_path(product) %></td>
+        <td><%= link_to product.name, product_path(product), :target => "_blank" %></td>
         <td><%= product.price %></td>
         <td><%= product.sale_price %></td>
         <td><%= product.brand %></td>
@@ -38,6 +38,7 @@
         <td><%= product.product_type.split("_")[1] %></td>
         <!-- <td><%=l product.created_at %></td> -->
         <td>
+          <%= link_to "Show", product_path(product), :class => 'btn btn-mini btn-primary', :target => "_blank" %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_product_path(product), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

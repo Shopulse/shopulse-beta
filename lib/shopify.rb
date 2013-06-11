@@ -3,7 +3,7 @@ class Shopify
 	def self.create product		
 		vendor = product.user_info.name
 		p = ShopifyAPI::Product.create({ 
-			:body_html => product.description.gsub("\r\n", "<br>")+"<br>material: " + product.material,
+			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
@@ -28,7 +28,7 @@ class Shopify
 		p.variants.map { |x| var_id_list.push x.id }
 
 		p.update_attributes ({
-			:body_html => product.description.gsub("\r\n", "<br>")+"<br>material: " + product.material,
+			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
