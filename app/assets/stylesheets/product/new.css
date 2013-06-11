@@ -1,3 +1,13 @@
+#form-container
+{
+	padding: 30px;
+	background-color: white;
+	width: auto;
+	-moz-box-shadow:    0px 5px 30px 10px #ccc;
+	-webkit-box-shadow: 0px 5px 30px 10px #ccc;
+	box-shadow:         0px 5px 30px 10px #ccc;
+}
+
 #new_product .row-fluid
 {
 	border-bottom: 1px solid lightgrey;
@@ -15,4 +25,40 @@
 .icon-eject:hover
 {
 	color: red;
-};
+}
+
+.container
+{
+	width: 73%;
+}
+
+.header
+{
+	border-bottom: 1px solid lightgrey;
+}
+
+.form-horizontal .control-label 
+{
+	width: 106px;
+}
+
+.form-horizontal .controls 
+{
+	margin-left: 120px;
+}
+
+#size_table input
+{
+	width: 100px;
+}
+
+#size_list
+{
+	width: 190px;
+}
+
+.form-actions
+{
+	margin: 0px;
+	padding: 20px 0 0 0;
+}

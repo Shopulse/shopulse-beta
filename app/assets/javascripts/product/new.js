@@ -1,3 +1,11 @@
+function stopRKey(evt) { 
+  var evt = (evt) ? evt : ((event) ? event : null); 
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+} 
+
+document.onkeypress = stopRKey; 
+
 function fileList()
 {
 	for(i=0 ; i<5 ; i++)
@@ -49,7 +57,7 @@ function size_list_change()
 		list = [];
 	for (i = 0 ; i < list.length ; i++)
 	{
-		str = "<tr><td><b>" + list[i] + "</b></td><td><input type='number' class='span12'/></td></tr>";
+		str = "<tr><td><b>" + list[i] + "</b></td><td><input type='number'/></td></tr>";
 		html = $.parseHTML(str);
 		table = table.append(html);
 	}
@@ -87,7 +95,7 @@ function json_to_table()
 	sizes = [];
 	for (key in list)
 	{
-		str = "<tr><td><b>" + key + "</b></td><td><input type='number' class='span12' value='" + list[key] + "' /></td></tr>";
+		str = "<tr><td><b>" + key + "</b></td><td><input type='number' value='" + list[key] + "' /></td></tr>";
 		html = $.parseHTML(str);
 		table = table.append(html);
 		sizes.push(key);

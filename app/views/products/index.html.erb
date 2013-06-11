@@ -15,8 +15,8 @@
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:sale_price) %></th>
       <th><%= model_class.human_attribute_name(:brand) %></th>
-      <th><%= model_class.human_attribute_name(:material) %></th>
-      <th><%= model_class.human_attribute_name(:gender) %></th>
+      <th><%= model_class.human_attribute_name(:gender) %></th>      
+      <th><%= model_class.human_attribute_name(:product_type) %></th>
       <!-- <th><%= model_class.human_attribute_name(:created_at) %></th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -34,8 +34,8 @@
         <td><%= product.price %></td>
         <td><%= product.sale_price %></td>
         <td><%= product.brand %></td>
-        <td><%= product.material %></td>
-        <td><%= product.gender %></td>
+        <td><%= product.product_type.split("_")[0].capitalize %></td>
+        <td><%= product.product_type.split("_")[1] %></td>
         <!-- <td><%=l product.created_at %></td> -->
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
