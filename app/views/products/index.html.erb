@@ -38,7 +38,7 @@
         <td><%= product.product_type.split("_")[1] %></td>
         <!-- <td><%=l product.created_at %></td> -->
         <td>
-          <%= link_to "Show", product_path(product), :class => 'btn btn-mini btn-primary', :target => "_blank" %>
+          <%= link_to "View", product_path(product), :class => 'btn btn-mini', :target => "_blank" %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_product_path(product), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

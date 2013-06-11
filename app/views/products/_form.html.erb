@@ -87,7 +87,7 @@
         <div class="controls">
           <%= f.hidden_field :sizes, :required => true %>
           <div class="input-append">
-            <input id='size_list' type='text' class='text_field' placeholder="XS, M, L, 7, 9.5" onchange="size_list_change()" />
+            <input id='size_list' type='text' class='text_field' placeholder="One Size, XS, M, L, 7, 9.5" onchange="size_list_change()" />
             <button class="btn" type="button" onclick="size_list_change()"><i class="icon-arrow-down"></i></button>
           </div>
         </div>
@@ -156,7 +156,7 @@
   </div>
 
   <div class="form-actions" style='float: right; background-color: white'>
-    <button class='btn btn-primary' onclick="form_submit()">Done</button>
+    <button class='btn btn-primary' onclick="form_submit()">Add Product</button>
     <!-- <%= f.submit nil, :class => 'btn btn-primary', "onclick" => "form_submit()" %> -->
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
     products_path, :class => 'btn' %>
