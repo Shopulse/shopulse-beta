@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   def show    
     user = current_user.user_info
     product = user.products.find(params[:id]) if !user.admin
-    product = Product.find(params[:id]) if user.admin    
+    product = Product.find(params[:id]) if user.admin
     # respond_to do |format|
     #   format.html # show.html.erb
     #   format.json { render json: @product }
@@ -41,9 +41,10 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit    
-    @product = current_user.user_info.products.find(params[:id])
-    @product = Product.find(params[:id]) if current_user.user_info.admin
+  def edit
+    user = current_user.user_info
+    @product = user.products.find(params[:id]) if !user.admin
+    @product = Product.find(params[:id]) if user.admin
     (5-@product.photos.count).times { @product.photos.build }
   end
 
@@ -67,16 +68,22 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.json
   def update
-    @product = current_user.user_info.products.find(params[:id])
-    @product = Product.find(params[:id]) if current_user.user_info.admin    
+    user = current_user.user_info
+    product = user.products.find(params[:id]) if !user.admin
+    product = Product.find(params[:id]) if user.admin
+    (5-product.photos.count).times { product.photos.build }
+    
     respond_to do |format|
-      if @product.update_attributes(params[:product])
-        Shopify.modify @product
+      if product.update_attributes(params[:product])
+        product.photos.delete_if { |x| x.photo_file_name == nil }
+        puts product.photos
+        product.save
+        Shopify.modify product
         format.html { redirect_to :action => 'index' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.json { render json: product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,9 +91,11 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy    
-    @product = current_user.user_info.products.find(params[:id])
-    Shopify.delete @product
-    @product.destroy
+    user = current_user.user_info
+    product = user.products.find(params[:id]) if !user.admin
+    product = Product.find(params[:id]) if user.admin
+    Shopify.delete product
+    product.destroy
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }

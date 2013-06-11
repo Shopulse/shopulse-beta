@@ -17,7 +17,9 @@ class Photo < ActiveRecord::Base
 	private
 	
 	def randomize_file_name
-		extension = File.extname(photo_file_name).downcase
-		self.photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+		if photo_file_name != nil
+			extension = File.extname(photo_file_name).downcase
+			self.photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")		
+		end
 	end
 end
