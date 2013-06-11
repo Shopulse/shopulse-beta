@@ -25,6 +25,11 @@
 	color: red;
 }
 
+.container
+{
+	width: 1030px;
+}
+
 .header
 {
 	border-bottom: 1px solid lightgrey;
