@@ -1,6 +1,6 @@
 
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
-timeout 60
+timeout 15
 preload_app true
 
 before_fork do |server, worker|
@@ -22,4 +22,4 @@ after_fork do |server, worker|
   ActiveRecord::Base.establish_connection
 end
 
-Rack::Timeout.timeout = 60
+Rack::Timeout.timeout = 240
