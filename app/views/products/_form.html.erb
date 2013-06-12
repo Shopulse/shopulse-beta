@@ -156,10 +156,9 @@
   </div>
 
   <div class="form-actions" style='float: right; background-color: white'>
-    <button class='btn btn-primary' onclick="form_submit()">Add Product</button>
-    <!-- <%= f.submit nil, :class => 'btn btn-primary', "onclick" => "form_submit()" %> -->
+    <button class='btn btn-primary' onclick="form_submit()"><%= @submit_button_title %></button>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
     products_path, :class => 'btn' %>
-  </div>  
+  </div>
 <% end %>
 
