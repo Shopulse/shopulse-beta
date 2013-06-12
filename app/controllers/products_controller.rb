@@ -46,6 +46,9 @@ class ProductsController < ApplicationController
     @product = user.products.find(params[:id]) if !user.admin
     @product = Product.find(params[:id]) if user.admin
     (5-@product.photos.count).times { @product.photos.build }
+    @product.photos.each do |x|
+      x.destroy if x.photo_file_name == nil
+    end
   end
 
   # POST /products
