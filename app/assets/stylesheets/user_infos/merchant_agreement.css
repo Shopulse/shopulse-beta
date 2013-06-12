@@ -1,0 +1,10 @@
+.container .content
+{
+	display: block;
+	width: 900px;
+	background-color: white;
+	border-radius: 10px;
+	position: relative;
+	top: 30px;
+	padding: 50px;
+}

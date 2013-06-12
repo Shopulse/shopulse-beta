@@ -1,6 +1,12 @@
 class UserInfosController < ApplicationController
+	skip_before_filter :authenticate, :only => :merchant_agreement
+	
 	def edit_profile
 		@user_info = current_user.user_info
+	end
+
+	def merchant_agreement
+
 	end
 
 	def update
