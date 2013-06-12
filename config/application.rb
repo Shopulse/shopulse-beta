@@ -38,12 +38,12 @@ module ShopulseBeta
 
     #Paperclip
     config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => 'ggmichaelgo',
-      :access_key_id => 'AKIAJ4DCD2FAZNJFIO5A',
-      :secret_access_key => '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'
+      :storage => :s3,
+      :s3_credentials => {
+        :bucket => 'ggmichaelgo',
+        :access_key_id => 'AKIAJ4DCD2FAZNJFIO5A',
+        :secret_access_key => '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'
+        }
     }
-
   end
 end
