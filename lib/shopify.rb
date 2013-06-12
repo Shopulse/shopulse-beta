@@ -1,4 +1,28 @@
 class Shopify
+	
+	def self.collection_add product
+		collection_delete product
+		#women => 9872481
+		#men => 9872477
+		c_id = 9872477 if product.product_type.split("_")[0] == "Men"
+		c_id = 9872481 if product.product_type.split("_")[0] == "Women"
+
+		ShopifyAPI::Collect.create({
+			:collection_id => c_id,
+			:product_id => product.shopify_id,
+			:sort_value => product.brand + " - " + product.name,
+		})
+	end
+
+	def self.collection_delete product
+		#this needs to be improved
+		product.shopify_id = product.shopify_id.to_i
+		list = ShopifyAPI::Collect.all.select { |x| x.product_id == product.shopify_id.to_i }
+		
+		list.each do |x|
+			x.destroy
+		end
+	end
 
 	def self.create product		
 		vendor = product.user_info.name
@@ -13,10 +37,16 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type
-		})
+			:product_type => product.product_type.split("_").last,
+			:tags => product.product_type.split("_").join(", ")
+		})		
 		product.shopify_id = p.id
 		product.save
+		
+		#add to collection
+		collection_add product
+
+		puts p.errors.messages if p.errors.messages != nil
 		return p
 	end
 
@@ -37,11 +67,14 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type
-		})
-		
-		10.times { puts p.errors.messages }
+			:product_type => product.product_type.split("_").last,
+			:tags => product.product_type.split("_").join(", ")
+		})		
+		puts p.errors.messages if p.errors.messages != nil
 		p.save
+
+		#add to collection
+		collection_add product
 	end
 
 	def self.delete product

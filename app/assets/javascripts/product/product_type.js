@@ -1,26 +1,26 @@
 var dic = [];
 var gender = 'none';
 
-dic['men'] = ['Clothing', 'Shoes', 'Accessories'];
+dic['Men'] = ['Clothing', 'Shoes', 'Accessories'];
 
-dic['men']['Clothing'] = ['Blazers','Coats and jackets','Casual shirts','Formal shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
-dic['men']['Shoes'] = ['Boat shoes','Boots','Derbies','Espadrilles','Loafers','Oxfords','Sandals','Shoe accessories','Slippers','Sneakers'];
-dic['men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewellery','Pocket squares','Scarves','Socks','Sunglasses','Ties','Travel','Wallets','Watches'];
+dic['Men']['Clothing'] = ['Blazers','Coats and jackets','Casual shirts','Formal shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
+dic['Men']['Shoes'] = ['Boat shoes','Boots','Derbies','Espadrilles','Loafers','Oxfords','Sandals','Shoe accessories','Slippers','Sneakers'];
+dic['Men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewellery','Pocket squares','Scarves','Socks','Sunglasses','Ties','Travel','Wallets','Watches'];
 
 
 
-dic['women'] =  ['Clothing', 'Shoes', 'Bags', 'Accessories'];
-
-dic['women']['Clothing'] = ['Dresses','Tops','Jackets, Blazers & Vests','Sweaters','Denim','Pants, Shorts & Jumpsuits','Leggings','Skirts','Suits','Swimwear','Outerwear','Lingerie','Sleepwear & Loungewear'];
-dic['women']['Shoes'] = ['Boots','Flat shoes','Pumps','Sandals','Sneakers'];
-dic['women']['Bags'] = ['Clutch Bags','Shoulder Bags','Tote Bags','Travel Bags'];
-dic['women']['Accessories'] = ['Belts','Jewelry','Hat','Scarves','Sunglasses','Travel','Wallets','Watches'];
+dic['Women'] =  ['Clothing', 'Shoes', 'Bags', 'Accessories'];
+dic['Women']['Clothing'] = ['Dresses','Tops','Jackets, Blazers & Vests','Sweaters','Denim','Pants, Shorts & Jumpsuits','Leggings','Skirts','Suits','Swimwear','Outerwear','Lingerie','Sleepwear & Loungewear'];
+dic['Women']['Shoes'] = ['Boots','Flat shoes','Pumps','Sandals','Sneakers'];
+dic['Women']['Bags'] = ['Clutch Bags','Shoulder Bags','Tote Bags','Travel Bags'];
+dic['Women']['Accessories'] = ['Belts','Jewelry','Hat','Scarves','Sunglasses','Travel','Wallets','Watches'];
 
 function set_product_type()
 {
 	val = $('#product_product_type').val();
 	g = val.split("_")[0];
-	name = val.split("_")[1];
+	c = val.split("_")[1];
+	name = val.split("_")[2];
 
 	type_gender(g);	
 
@@ -42,10 +42,7 @@ function set_product_type()
 
 function type_gender(g)
 {
-	if(g=='men') g = 'Men';
-	if(g=='women') g = 'Women';
 	$('#type_gender t')[0].innerHTML = g;
-	g = g.toLowerCase();
 
 	$('#type_category ul').children().remove();
 	
@@ -76,6 +73,6 @@ function type_category(g, c)
 function type_name(g, t)
 {
 	$('#type_name t')[0].innerHTML = t;
-	$('#product_product_type').val(g+'_'+t);
+	$('#product_product_type').val(g+'_'+$('#type_category t')[0].innerHTML+'_'+t);
 }
 

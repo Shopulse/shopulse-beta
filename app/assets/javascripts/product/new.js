@@ -8,12 +8,12 @@ document.onkeypress = stopRKey;
 
 function fileList()
 {
-	for(i=0 ; i<5 ; i++)
-	{
-		obj = $('#product_photos_attributes_'+i+'_id');
-		if(obj.length != 0)
-			$('#product_photos_attributes_'+i+'_photo')[0].type = 'hidden';
-	}
+	// for(i=0 ; i<5 ; i++)
+	// {
+	// 	obj = $('#product_photos_attributes_'+i+'_id');
+	// 	if(obj.length != 0)
+	// 		$('#product_photos_attributes_'+i+'_photo')[0].type = 'hidden';
+	// }
 }
 
 function set_gender()
