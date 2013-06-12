@@ -44,6 +44,6 @@ module ShopulseBeta
       :access_key_id => 'AKIAJ4DCD2FAZNJFIO5A',
       :secret_access_key => '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'
     }
-  }
+
   end
 end

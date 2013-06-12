@@ -21,12 +21,14 @@
 
 				<div>
 					<%= f.label :password_confirmation %>
-					<%= f.password_field :password_confirmation, :placeholder => 'confirm password', :pattern => ".{7,20}" , :required => true %>					
+					<%= f.password_field :password_confirmation, :placeholder => 'confirm password', :pattern => ".{7,20}" , :required => true %>
 				</div>
-
+				<div>
+					<input required="true" type="checkbox"/>
+				</div>
 				<div>
 					<%= f.submit "Sign Up", :class => 'btn btn-danger', :id => 'login_button' %>
-				</div>
+				</div>				
 				<% end %>
 			</div>
 		</td>

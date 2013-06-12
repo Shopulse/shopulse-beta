@@ -31,3 +31,5 @@ gem 'aws-sdk'
 
 #Shopify
 gem 'shopify_api'
+
+gem 'unicorn'
