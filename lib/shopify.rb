@@ -24,13 +24,19 @@ class Shopify
 		end
 	end
 
+	def self.product_description
+		text = product.description.gsub("\r\n", "<br><br>")
+		text = text+"<br><br>material: " + product.material if product.material != ""
+		text = text+"<br><br>This item will be shipped from a boutique in #{user.city}, #{user.province}, #{user.country}",
+	end
+
 	def self.create product
 		user = product.user_info
 		vendor = user.name
 		tags = product.product_type.split("_").reverse
 		tags.pop
 		p = ShopifyAPI::Product.create({ 
-			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material + "<br>This item will be shipped from a boutique in #{user.city}, #{user.province}, #{user.country}",
+			:body_html => product_description product
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
@@ -64,7 +70,7 @@ class Shopify
 		tags = product.product_type.split("_").reverse
 		tags.pop
 		p.update_attributes ({
-			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material + "<br>This item will be shipped from a boutique in #{user.city}, #{user.province}, #{user.country}",
+			:body_html => product_description product
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
