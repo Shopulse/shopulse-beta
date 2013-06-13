@@ -24,8 +24,10 @@ class Shopify
 		end
 	end
 
-	def self.create product		
+	def self.create product
 		vendor = product.user_info.name
+		tags = product.product_type.split("_").reverse
+		tags.pop
 		p = ShopifyAPI::Product.create({ 
 			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
 			:title => product.brand + " - " + product.name,
@@ -37,8 +39,8 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type.split("_").last,
-			:tags => product.product_type.split("_").join(", ")
+			:product_type => tags.first,
+			:tags => tags.join(",")
 		})		
 		product.shopify_id = p.id
 		product.save
@@ -56,6 +58,9 @@ class Shopify
 
 		var_id_list = []
 		p.variants.map { |x| var_id_list.push x.id }
+
+		tags = product.product_type.split("_").reverse
+		tags.pop
 		p.update_attributes ({
 			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
 			:title => product.brand + " - " + product.name,
@@ -67,8 +72,8 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type.split("_").last,
-			:tags => product.product_type.split("_").join(", ")
+			:product_type => tags.first,
+			:tags => tags
 		})		
 		puts p.errors.messages if p.errors.messages != nil
 		p.save

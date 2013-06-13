@@ -146,7 +146,7 @@
           <%= f.fields_for :photos do |p| %>
             <% if p.object.new_record? %>
             <p>
-              <%= p.file_field :photo, :accept=>"image/x-png, image/jpg, image/jpeg" %><br>
+              <%= p.file_field :photo, :accept=>"image/png, image/jpg, image/jpeg" %><br>
             </p>
             <% end %>
           <% end %>
