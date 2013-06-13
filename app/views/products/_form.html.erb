@@ -156,9 +156,10 @@
   </div>
 
   <div class="form-actions" style='float: right; background-color: white'>
-    <button class='btn btn-primary' onclick="form_submit()"><%= @submit_button_title %></button>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-    products_path, :class => 'btn' %>
+    <button class='btn btn-primary' onclick="form_submit()" data-disable-with="Uploading..."><%= @submit_button_title %></button>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn' %>
   </div>
 <% end %>
 
+
+<!-- It may take a few seconds while the product is getting added -->
