@@ -24,10 +24,19 @@ class Shopify
 		end
 	end
 
-	def self.create product		
-		vendor = product.user_info.name
+	def self.product_description product, user
+		text = product.description.gsub("\r\n", "<br><br>")
+		text = text+"<br><br>material: " + product.material if product.material != ""
+		text = text+"<br><br>This item will be shipped from a boutique in #{user.city}, #{user.province}, #{user.country}"
+	end
+
+	def self.create product
+		user = product.user_info
+		vendor = user.name
+		tags = product.product_type.split("_").reverse
+		tags.pop
 		p = ShopifyAPI::Product.create({ 
-			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
+			:body_html => product_description(product, user),
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
@@ -37,8 +46,8 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type.split("_").last,
-			:tags => product.product_type.split("_").join(", ")
+			:product_type => tags.first,
+			:tags => tags.join(",")
 		})		
 		product.shopify_id = p.id
 		product.save
@@ -51,13 +60,17 @@ class Shopify
 	end
 
 	def self.modify product
-		vendor = product.user_info.name
+		user = product.user_info
+		vendor = user.name
 		p = ShopifyAPI::Product.find product.shopify_id
 
 		var_id_list = []
 		p.variants.map { |x| var_id_list.push x.id }
+
+		tags = product.product_type.split("_").reverse
+		tags.pop
 		p.update_attributes ({
-			:body_html => product.description.gsub("\r\n", "<br><br>")+"<br>material: " + product.material,
+			:body_html => product_description(product, user),
 			:title => product.brand + " - " + product.name,
 			:handle => (vendor + " " + product.name).gsub(" ","-"),
 			:images => product.photos.map { |x| { :src => x = x.photo.url }},
@@ -67,8 +80,8 @@ class Shopify
 			:requires_shipping => true,
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
-			:product_type => product.product_type.split("_").last,
-			:tags => product.product_type.split("_").join(", ")
+			:product_type => tags.first,
+			:tags => tags.to_s
 		})		
 		puts p.errors.messages if p.errors.messages != nil
 		p.save
@@ -94,7 +107,7 @@ class Shopify
 			var[:inventory_management] = "shopify"
 			var[:inventory_quantity] = inventory[size].to_i
 			var[:compare_at_price] = product.price
-			var[:price] = product.sale_price
+			var[:price] = product.sale_price * 1.029
 			var[:sku] = vendor+"-"+product.name+"-"+size
 			var_list.push var
 		end
