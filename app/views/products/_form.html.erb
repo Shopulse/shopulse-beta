@@ -1,165 +1,177 @@
 <%= javascript_include_tag 'product/new' %>
 <%= javascript_include_tag 'product/product_type' %>
+<%= javascript_include_tag 'jquery.form' %>
 <%= stylesheet_link_tag "product/new" %>
+<%= stylesheet_link_tag "product/loader" %>
 
-
-<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true} do |f| %> 
-
-  <div class='row'>
-    <div class='span10 header'>
-      <h5>Informations</h5>
+<div class="loader-container">
+  <div class='loader-box'>
+    <div class='loader-content'> 
+      <%= image_tag "logo.png", :width => '125px' %>
+      <br><br>
+      <div class="progress">
+        <div class="bar" style="width: 0%;"></div>
+      </div>
+      <!-- <% image_tag "ajax_loader.gif", :width => "50px" %> -->
+      <p>It may take a few seconds while the product<br>is getting added</p>    
     </div>
   </div>
-  <br>
+</div>
 
-  <div class='row'>
-    <div class="span5">
-      <div class="control-group">  
-        <%= f.label :name, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :name, :class => 'text_field', :placeholder => "Name", :required => true %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :brand, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :brand, :class => 'text_field', :placeholder => 'Brand', :required => true %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :description, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_area :description, :class => 'text_area', :rows => 5, :placeholder => 'Description', :required => true %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :material, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :material, :class => 'text_field', :rows => 1, :placeholder => 'split by comma' %>
-        </div>
+
+<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true}, :remote => true do |f| %> 
+<div class='row'>
+  <div class='span10 header'>
+    <h5>Informations</h5>
+  </div>
+</div>
+<br>
+
+<div class='row'>
+  <div class="span5">
+    <div class="control-group">  
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field', :placeholder => "Name", :required => true %>
       </div>
     </div>
-
-
-    <div class='span5'>
-      <div class="control-group">
-        <%= f.label :product_type, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.hidden_field :product_type %>
-
-          <!-- Gender -->
-          <div class="btn-group" id='type_gender'>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <t>Gender</t>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a onclick="type_gender('Men')">Men</a></li>
-              <li><a onclick="type_gender('Women')">Women</a></li>
-            </ul>
-          </div>
-
-          <!-- Category -->
-          <div class="btn-group" id='type_category' style='display: none;'>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <t>Category</t>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">  
-            </ul>
-          </div>
-
-          <!-- name -->
-          <div class="btn-group" id='type_name' style='display: none;'>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <t>Type</t>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">  
-            </ul>
-          </div>
-
-        </div>
+    <div class="control-group">
+      <%= f.label :brand, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :brand, :class => 'text_field', :placeholder => 'Brand', :required => true %>
       </div>
-
-      <div class="control-group">
-        <label class='control-label'>Available Sizes</label>
-        <div class="controls">
-          <%= f.hidden_field :sizes, :required => true %>
-          <div class="input-append">
-            <input id='size_list' type='text' class='text_field' placeholder="One Size, XS, M, L, 7, 9.5" onchange="size_list_change()" />
-            <button class="btn" type="button" onclick="size_list_change()"><i class="icon-arrow-down"></i></button>
-          </div>
-        </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_area', :rows => 5, :placeholder => 'Description', :required => true %>
       </div>
-      <div class="control-group">
-        <label class='control-label'>Size Quantities</label>
-        <div class="controls">
-          <table class='table' id='size_table' style='width: 240px'>
-            <tr>
-              <td width='120px'>Size</td>
-              <td>Quantity</td>
-            </tr>
-          </table>
-        </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :material, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :material, :class => 'text_field', :rows => 1, :placeholder => 'split by comma' %>
       </div>
-
     </div>
   </div>
-    
 
-  <div class='row'>
-    <div class='span10 header'>
-      <!-- <h5>Detail Informations</h5> -->
+
+  <div class='span5'>
+    <div class="control-group">
+      <%= f.label :product_type, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.hidden_field :product_type %>
+
+        <!-- Gender -->
+        <div class="btn-group" id='type_gender'>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <t>Gender</t>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a onclick="type_gender('Men')">Men</a></li>
+            <li><a onclick="type_gender('Women')">Women</a></li>
+          </ul>
+        </div>
+
+        <!-- Category -->
+        <div class="btn-group" id='type_category' style='display: none;'>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <t>Category</t>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">  
+          </ul>
+        </div>
+
+        <!-- name -->
+        <div class="btn-group" id='type_name' style='display: none;'>
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <t>Type</t>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">  
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class='control-label'>Available Sizes</label>
+      <div class="controls">
+        <%= f.hidden_field :sizes, :required => true %>
+        <div class="input-append">
+          <input id='size_list' type='text' class='text_field' placeholder="One Size, XS, M, L, 7, 9.5" onchange="size_list_change()" />
+          <button class="btn" type="button" onclick="size_list_change()"><i class="icon-arrow-down"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class='control-label'>Size Quantities</label>
+      <div class="controls">
+        <table class='table' id='size_table' style='width: 240px'>
+          <tr>
+            <td width='120px'>Size</td>
+            <td>Quantity</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class='row'>
+  <div class='span10 header'>
+    <!-- <h5>Detail Informations</h5> -->
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="span6">
+    <div class="control-group">
+      <%= f.label :price, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :price, :class => 'number_field', :html => {'step' => 'any'}, :placeholder => '0.00', :required => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :sale_price, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :sale_price, :class => 'number_field', :html => {'step' => 'any'}, :placeholder => '0.00', :required => true %>
+      </div>
     </div>
   </div>
-  <br>
-
-  <div class="row">
-    <div class="span6">
-      <div class="control-group">
-        <%= f.label :price, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :price, :class => 'number_field', :html => {'step' => 'any'}, :placeholder => '0.00', :required => true %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :sale_price, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :sale_price, :class => 'number_field', :html => {'step' => 'any'}, :placeholder => '0.00', :required => true %>
-        </div>
-      </div>
-    </div>
   
-    <div class="span3">
-      <div class="control-group" style='float: right'>
-        <%= f.label :photos, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.fields_for :photos do |p| %>
-            <% unless p.object.new_record? %>
-              <div class="thumb">
-                <%= link_to image_tag(p.object.photo.url(:thumb)), p.object.photo.url(:original) %>
-                remove? <%= p.check_box :_destroy%> 
-              </div>
-            <% end %>
-          <% end %>
-          <%= f.fields_for :photos do |p| %>
-            <% if p.object.new_record? %>
-            <p>
-              <%= p.file_field :photo, :accept=>"image/png, image/jpg, image/jpeg" %><br>
-            </p>
-            <% end %>
-          <% end %>
-        </div>
+  <div class="span3">
+    <div class="control-group" style='float: right'>
+      <%= f.label :photos, :class => 'control-label' %>
+      <div class="controls">        
+        <%= f.fields_for :photos do |p| %>        
+        <% if p.object.new_record? == false && p.object.photo.url != "/photos/original/missing.png" %>
+          <div class="thumb">
+            <%= link_to image_tag(p.object.photo.url(:thumb)), p.object.photo.url(:original) %>
+            remove? <%= p.check_box :_destroy%> 
+          </div>
+        <% end %>
+        <% end %>
+        <%= f.fields_for :photos do |p| %>
+        <% if p.object.new_record? || p.object.photo.url == "/photos/original/missing.png"%>
+        <p>
+          <%= p.file_field :photo, :accept=>"image/png, image/jpg, image/jpeg" %><br>
+        </p>
+        <% end %>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="form-actions" style='float: right; background-color: white'>
-    <button class='btn btn-primary' onclick="form_submit()" data-disable-with="Uploading..."><%= @submit_button_title %></button>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn' %>
-  </div>
+<div class="form-actions" style='float: right; background-color: white'>
+  <button class='btn btn-primary' onclick="upload()" data-disable-with="Uploading..."><%= @submit_button_title %></button>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn' %>
+</div>
 <% end %>
-
-
-<!-- It may take a few seconds while the product is getting added -->

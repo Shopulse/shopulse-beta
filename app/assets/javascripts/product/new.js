@@ -6,6 +6,26 @@ function stopRKey(evt) {
 
 document.onkeypress = stopRKey; 
 
+$(document).ready( function(){
+	$('form').ajaxForm({
+		beforeSend: function() {
+			$(".loader-container").fadeIn();
+		},
+		uploadProgress: function(event, position, total, percentComplete) {
+			$('.bar').css('width', percentComplete+"%");
+			console.log(percentComplete+"%");
+		},
+		success: function(){
+			$('.bar').css('width', "100%");	
+		},
+		complete: function(xhr) {
+			// location = "/products";
+			$(".loader-container").fadeOut();
+		}
+	}); 
+	$("form").unbind('submit');
+});
+
 function fileList()
 {
 	// for(i=0 ; i<5 ; i++)
@@ -63,7 +83,7 @@ function size_list_change()
 	}
 }
 
-function form_submit()
+function upload()
 {
 	list = size_table_to_json();
 	obj = {};
@@ -73,7 +93,8 @@ function form_submit()
 	}
 	$('#product_sizes').val(JSON.stringify(obj));
 	gender_select();
-	$('form').submit();
+	//$('form').submit();
+	console.log("called upload()");
 }
 
 function size_table_to_json()

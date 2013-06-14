@@ -48,9 +48,12 @@ class ProductsController < ApplicationController
     photo_count = @product.photos.count
     
     (5-photo_count).times { @product.photos.build }
-    @product.photos.each do |x|
+    @product.photos.each do |x|      
       x.destroy if x.photo_file_name == nil
+      puts @product.photos.count
     end
+    puts "#"
+    10.times { puts @product.photos.count } 
   end
 
   # POST /products
