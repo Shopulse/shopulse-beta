@@ -8,18 +8,20 @@
   <div class='loader-box'>
     <div class='loader-content'> 
       <%= image_tag "logo.png", :width => '125px' %>
-      <br><br>
-      <div class="progress">
+      <br>
+      <div class="progress" style='height: 3px; width: 140px; margin: 0 auto'>
         <div class="bar" style="width: 0%;"></div>
-      </div>
-      <!-- <% image_tag "ajax_loader.gif", :width => "50px" %> -->
+      </div>      
+      <br>
+      <%= image_tag "ajax_loader.gif", :width => "25px" %>
+      <br><br>
       <p>It may take a few seconds while the product<br>is getting added</p>    
     </div>
   </div>
 </div>
 
 
-<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true}, :id => '#product_form' do |f| %> 
+<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true} do |f| %> 
 <div class='row'>
   <div class='span10 header'>
     <h5>Informations</h5>
@@ -173,7 +175,9 @@
 </div>
 
 <div class="form-actions" style='float: right; background-color: white'>
-  <button class='btn btn-primary' onclick="upload()" data-disable-with="Uploading..."><%= @submit_button_title %></button>
+
+  <%= f.submit @submit_button_title, :class => 'btn btn-primary' %>
+  <% f.label @submit_button_title, :disable_with => 'Submiting...', :class => 'btn btn-primary', :onclick => 'upload()' %>
   <%= link_to t('.cancel', :default => t("helpers.links.cancel")), products_path, :class => 'btn' %>
 </div>
 <% end %>

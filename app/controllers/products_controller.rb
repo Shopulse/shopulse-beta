@@ -57,7 +57,9 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(params[:product])
+    remove_empty_image params[:product][:photos_attributes]
+    puts params[:product]
+    @product = Product.new(params[:product])        
     respond_to do |format|
       if @product.save
         current_user.user_info.products.push @product
@@ -79,6 +81,8 @@ class ProductsController < ApplicationController
     product = Product.find(params[:id]) if user.admin
     (5-product.photos.count).times { product.photos.build }
     
+    remove_empty_image params[:product][:photos_attributes]
+
     respond_to do |format|
       if product.update_attributes(params[:product])
         product.photos.delete_if { |x| x.photo_file_name == nil }
@@ -114,5 +118,17 @@ class ProductsController < ApplicationController
     @products = UserInfo.find(params[:id]).products
     @admin = true
     render :action => "index"
+  end
+
+  private
+  def remove_empty_image list
+    #remove empty pictures
+    list.each do |x|
+      begin
+        list.delete x[0] if x[1]["photo"] == ""
+      rescue
+        #nothting
+      end
+    end
   end
 end

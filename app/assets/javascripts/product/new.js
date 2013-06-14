@@ -1,20 +1,39 @@
 function stopRKey(evt) { 
-  var evt = (evt) ? evt : ((event) ? event : null); 
-  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
-  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+	var evt = (evt) ? evt : ((event) ? event : null); 
+	var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+	if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
 } 
 
-document.onkeypress = stopRKey; 
+document.onkeypress = stopRKey;
 
-function fileList()
-{
-	// for(i=0 ; i<5 ; i++)
-	// {
-	// 	obj = $('#product_photos_attributes_'+i+'_id');
-	// 	if(obj.length != 0)
-	// 		$('#product_photos_attributes_'+i+'_photo')[0].type = 'hidden';
-	// }
-}
+$(document).ready(function(){
+	$('#'+$('form')[0].id).ajaxForm({
+		beforeSubmit: function(formData, form, options){ 
+			formData[formData.length] = { "name" : $('#product_sizes')[0].name , "value" : get_size() };
+			$('.loader-container').fadeIn(700);
+			setTimeout(function() {$('.bar').css('width', "100%");}, 800);
+		}, 
+		uploadProgress: function(event, position, total, percentComplete) {
+			//NOT WORKING
+
+		},
+		complete: function(){
+			$('.bar').css('width', "100%");
+
+		},
+		success: function(){ 
+			$('form input[type="submit"]')[0].disabled = false;
+			$('form input[type="submit"]').val()
+			$('.loader-container').fadeOut();
+			location = "/";
+		},
+		error: function(){
+			$('form input[type="submit"]')[0].disabled = false;
+			$('form input[type="submit"]').val()
+			$('.loader-container').fadeOut();	
+		}
+	});	
+});
 
 function set_gender()
 {
@@ -63,7 +82,7 @@ function size_list_change()
 	}
 }
 
-function upload()
+function get_size()
 {
 	list = size_table_to_json();
 	obj = {};
@@ -71,10 +90,7 @@ function upload()
 	{
 		obj[list[i][0].html()] = list[i][1].val();
 	}
-	$('#product_sizes').val(JSON.stringify(obj));
-	gender_select();
-	//$('form').submit();
-	console.log("called upload()");
+	return JSON.stringify(obj);
 }
 
 function size_table_to_json()
