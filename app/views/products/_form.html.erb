@@ -19,7 +19,7 @@
 </div>
 
 
-<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true}, :remote => true do |f| %> 
+<%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true}, :id => '#product_form' do |f| %> 
 <div class='row'>
   <div class='span10 header'>
     <h5>Informations</h5>
@@ -148,6 +148,7 @@
   
   <div class="span3">
     <div class="control-group" style='float: right'>
+      <% empty_image = 5 - @product.photos.count %>
       <%= f.label :photos, :class => 'control-label' %>
       <div class="controls">        
         <%= f.fields_for :photos do |p| %>        
@@ -159,10 +160,11 @@
         <% end %>
         <% end %>
         <%= f.fields_for :photos do |p| %>
-        <% if p.object.new_record? || p.object.photo.url == "/photos/original/missing.png"%>
+        <% if (p.object.new_record? || p.object.photo.url == "/photos/original/missing.png") && empty_image>0%>
         <p>
           <%= p.file_field :photo, :accept=>"image/png, image/jpg, image/jpeg" %><br>
         </p>
+        <% empty_image-=1%>
         <% end %>
         <% end %>
       </div>

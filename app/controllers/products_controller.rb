@@ -52,8 +52,6 @@ class ProductsController < ApplicationController
       x.destroy if x.photo_file_name == nil
       puts @product.photos.count
     end
-    puts "#"
-    10.times { puts @product.photos.count } 
   end
 
   # POST /products

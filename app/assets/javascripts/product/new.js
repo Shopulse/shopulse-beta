@@ -6,26 +6,6 @@ function stopRKey(evt) {
 
 document.onkeypress = stopRKey; 
 
-$(document).ready( function(){
-	$('form').ajaxForm({
-		beforeSend: function() {
-			$(".loader-container").fadeIn();
-		},
-		uploadProgress: function(event, position, total, percentComplete) {
-			$('.bar').css('width', percentComplete+"%");
-			console.log(percentComplete+"%");
-		},
-		success: function(){
-			$('.bar').css('width', "100%");	
-		},
-		complete: function(xhr) {
-			// location = "/products";
-			$(".loader-container").fadeOut();
-		}
-	}); 
-	$("form").unbind('submit');
-});
-
 function fileList()
 {
 	// for(i=0 ; i<5 ; i++)
