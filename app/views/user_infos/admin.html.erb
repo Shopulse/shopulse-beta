@@ -1,0 +1,68 @@
+<%= stylesheet_link_tag 'user_infos/admin' %>
+
+<% 
+p_cnt = Product.count 
+message = [':)', ':P', ':-)',':D','옷','훗']
+message = message[rand(message.count)]
+%>
+
+<br><br>
+
+<div class='row-fluid'>
+	<div class='span4' style='text-align: center'>
+		<div class='circle' style='width: 250px; height: 250px;'>
+			<div style='margin-top: 100px'>
+				<b><%= UserInfo.count%></b>
+				<br><br>
+				<b style='font-size: 12px'>retailer shops</b>
+			</div>
+		</div>
+	</div>
+	<div class='span4' style='text-align: center'>
+		<div class='circle' style='width: 250px; height: 250px;'>
+			<div style='margin-top: 100px'>
+				<b><%= p_cnt %></b>
+				<br><br>
+				<b style='font-size: 12px'>product<%= 's' if p_cnt > 1 %></b>
+			</div>
+		</div>
+	</div>
+	<div class='span4' style='text-align: center'>
+		<div class='circle' style='width: 250px; height: 250px;'>
+			<div style='margin-top: 105px'>				
+				<b><%= message %></b>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= UserInfo.human_attribute_name(:name) %></th>
+			<th><%= UserInfo.human_attribute_name(:email) %></th>
+			<th><%= UserInfo.human_attribute_name(:first_name) %></th>
+			<th><%= UserInfo.human_attribute_name(:last_name) %></th>
+			<th><%= UserInfo.human_attribute_name(:city) %></th>
+			<th><%= UserInfo.human_attribute_name(:province) %></th>
+			<th><%= UserInfo.human_attribute_name(:country) %></th>
+			<th><%= UserInfo.human_attribute_name(:phone) %></th>
+			<th>Products</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% UserInfo.all.each do |user| %>
+		<tr>
+			<td><%= link_to user.name, :controller => "products", :action => "retailer", :id => user.id %></td>
+			<td><%= user.email %></td>
+			<td><%= user.first_name %></td>
+			<td><%= user.last_name %></td>
+			<td><%= user.city %></td>
+			<td><%= user.province %></td>
+			<td><%= user.country %></td>
+			<td><%= user.phone %></td>
+			<td style='text-align: center'><%= user.products.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

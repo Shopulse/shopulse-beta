@@ -1,6 +1,16 @@
 class UserInfosController < ApplicationController
 	skip_before_filter :authenticate, :only => :merchant_agreement
+	before_filter :admin_check, :only => :admin
 	
+	private
+	def admin_check
+		if current_user.user_info.admin == false
+			redirect_to '/'
+		end
+	end
+
+	public
+
 	def edit_profile
 		@user_info = current_user.user_info
 	end
@@ -22,5 +32,9 @@ class UserInfosController < ApplicationController
 				format.html { render action: "edit_profile" }
 			end
 		end
+	end
+
+	def admin
+
 	end
 end

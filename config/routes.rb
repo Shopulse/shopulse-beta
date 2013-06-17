@@ -7,6 +7,6 @@ ShopulseBeta::Application.routes.draw do
 	
 	root :to => 'products#index'
 	
-
+	get '/admin', :to => 'user_infos#admin'
 	match ':controller(/:action(/:id))(.:format)'
 end

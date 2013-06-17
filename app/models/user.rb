@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
 	def default_create_user_info
 		create_user_info
 		self.user_info.email = self.email
-		self.save
+		self.user_info.save
 	end
 end

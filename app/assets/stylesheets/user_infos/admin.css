@@ -1,0 +1,19 @@
+.circle
+{
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+	/*background-color: rgb(209,28,46);*/
+	text-align: center;	
+}
+
+.circle b
+{
+	color: white;
+	font-size: 80px;
+}
+
+.row-fluid
+{
+	background-color: rgba(0,0,0,0.2);
+}

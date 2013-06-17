@@ -19,7 +19,7 @@
 				<div class="nav-collapse collapse" style='float: right'>
 					<ul class="nav">
 						<% if user_signed_in? %>
-							<li><a href="/">Home</a></li>							
+							<li><a href="/">Home</a></li>
 						<% end %>
 
 						<!-- <li>
@@ -29,11 +29,14 @@
 							<%= link_to "Contact", :controller => "registrations", :action => "index" %>
 						</li> -->
 
-						<% if user_signed_in? == false %>
+						<% if user_signed_in? == false %>						
 							<li>
 								<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
 							</li>
 						<% else %>
+							<% if current_user.user_info.admin  %>
+								<li><a href="/admin">Admin</a></li>
+							<% end %>
 							<li><%= link_to "Profile", :controller => "UserInfos", :action => "edit_profile" %></li>
 							<li><%= link_to "Log Out", :controller => "sessions", :action => "destroy" %></li>
 						<% end %> 
