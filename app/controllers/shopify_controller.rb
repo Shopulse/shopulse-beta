@@ -1,14 +1,21 @@
 class ShopifyController < ApplicationController
 	skip_before_filter :authenticate
-	
-	@@temp = 1
+
 	def check_out_create
-		@@temp = params
-		render :json => @@temp
-		10.times { puts params 	}
+		checkout = params
+		list = checkout.line_item.map { |x| x.product_id }
+		list.uniq!
+
+		list.each do |shopify_id|
+			p = Product.where "shopify_id = #{shopify_id}"
+			sizes = {}
+			p.variants.each do |x| 
+				sizes[title] = x.inventory_quantity
+			end
+			p.sizes = sizes.to_s
+			p.save
+		end
 	end
 
-	def check
-		render :json => @@temp
-	end
+
 end
