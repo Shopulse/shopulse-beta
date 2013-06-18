@@ -21,12 +21,13 @@ class ShopifyController < ApplicationController
 	end
 
 	def update_product shopify_id
-		p = Product.where "shopify_id = #{shopify_id}"
+		p = ShopifyAPI::Product.find shopify_id
 		sizes = {}
 		p.variants.each do |x| 
-			sizes[title] = x.inventory_quantity
+			sizes[x.title] = x.inventory_quantity
 		end
-		p.sizes = sizes.to_s
-		p.save
+		product = Product.where("shopify_id = #{shopify_id}")[0]
+		product.sizes = sizes.to_json
+		product.save
 	end
 end
