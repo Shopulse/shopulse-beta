@@ -2,6 +2,8 @@
 
 <% 
 p_cnt = Product.count 
+order_cnt = ShopifyAPI::Order.count
+user_cnt = UserInfo.count
 message = [':)', ':P', ':-)',':D','옷','훗']
 message = message[rand(message.count)]
 %>
@@ -12,9 +14,9 @@ message = message[rand(message.count)]
 	<div class='span4' style='text-align: center'>
 		<div class='circle' style='width: 250px; height: 250px;'>
 			<div style='margin-top: 100px'>
-				<b><%= UserInfo.count%></b>
+				<b><%= user_cnt %></b>
 				<br><br>
-				<b style='font-size: 12px'>retailer shops</b>
+				<b style='font-size: 12px'>Boutique<%= 's' if UserInfo.count > 1 %></b>
 			</div>
 		</div>
 	</div>
@@ -23,14 +25,19 @@ message = message[rand(message.count)]
 			<div style='margin-top: 100px'>
 				<b><%= p_cnt %></b>
 				<br><br>
-				<b style='font-size: 12px'>product<%= 's' if p_cnt > 1 %></b>
+				<b style='font-size: 12px'>Product<%= 's' if p_cnt > 1 %></b>
 			</div>
 		</div>
 	</div>
 	<div class='span4' style='text-align: center'>
 		<div class='circle' style='width: 250px; height: 250px;'>
 			<div style='margin-top: 105px'>				
-				<b><%= message %></b>
+				
+			</div>
+			<div style='margin-top: 100px'>
+				<b><%= order_cnt %></b>
+				<br><br>
+				<b style='font-size: 12px'>Order<%= 's' if order_cnt > 1 %></b>
 			</div>
 		</div>
 	</div>
