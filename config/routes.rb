@@ -1,7 +1,7 @@
 ShopulseBeta::Application.routes.draw do
 	resources :products
 
-	devise_for :users, :controllers => {:sessions => 'sessions', :registrations => 'registrations'} do
+	devise_for :users, :controllers => {:sessions => 'sessions', :registrations => 'registrations', :passwords => 'passwords'} do
 		get 'users/sign_out', :to => "sessions#destroy"
 	end
 	

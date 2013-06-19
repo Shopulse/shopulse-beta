@@ -8,13 +8,22 @@
 <div id='info_form' class='panel'>
 	<center>
 		<h2>Edit Profile</h2>
-	</center>
+	</center>	
+	<br>
 	<%= form_for @user_info, :url => { :controller => 'UserInfos', :action => 'update' }, :method => 'POST' do |f| %>
 	<div class='row-fluid'>
 		<div class='span5'>
 			<div>
 				<label>Boutique Name</label>
 				<%= f.text_field :name, :autofocus => true, :placeholder => 'Boutique Name', :required => true %>
+			</div>
+			<div>
+				<label>New Password</label>
+				<%= f.password_field :password, :placeholder => 'Password (minimum length = 7)', :pattern => ".{7,20}" , :required => true %>
+			</div>
+			<div>
+				<label>Password Confirmation</label>
+				<%= f.password_field :password_confirmation, :placeholder => 'Confirm Password', :pattern => ".{7,20}" , :required => true %>
 			</div>
 			<div>
 				<%= f.label :first_name %>
@@ -30,7 +39,7 @@
 			</div>
 		</div>
 		<div class='span2'></div>
-		<div class='span5'>
+		<div class='span5'>			
 			<div>
 				<%= f.label :address %>
 				<%= f.text_field :address, :autofocus => true, :placeholder => 'Address', :required => true %>
@@ -56,6 +65,6 @@
 	<br>
 	<center>
 		<%= f.submit "Complete Profile", :class => 'btn btn-primary', :id => 'login_button' %>
-	</center>
+	</center>	
 	<% end %>
 </div>

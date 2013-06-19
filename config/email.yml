@@ -1,0 +1,11 @@
+development:
+  :address: smtp.mandrillapp.com
+  :port: 587
+  :user_name: shopulse
+  :password: sHx9Uy5gRIrL2Qnd6ygjGg
+  
+production:
+  :address: smtp.mandrillapp.com
+  :port: 587
+  :user_name: shopulse
+  :password: sHx9Uy5gRIrL2Qnd6ygjGg

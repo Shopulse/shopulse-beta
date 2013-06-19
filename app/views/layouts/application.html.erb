@@ -12,14 +12,14 @@
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
-			<div class="container" style='width: 900px; height: 72px'>				
+			<div class="container" style='width: 900px; height: 72px'>
 				<a class="brand" href="/">
 					<%= image_tag "logo.png", :width => '125px' %>
 				</a>
 				<div class="nav-collapse collapse" style='float: right'>
 					<ul class="nav">
 						<% if user_signed_in? %>
-							<li><a href="/">Home</a></li>
+						<li><a href="/">Home</a></li>
 						<% end %>
 
 						<!-- <li>
@@ -29,18 +29,22 @@
 							<%= link_to "Contact", :controller => "registrations", :action => "index" %>
 						</li> -->
 
-						<% if user_signed_in? == false %>						
-							<li>
-								<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
-							</li>
+						<% if user_signed_in? == false %>
+						<li>
+							<%= link_to "Forgot Password?", new_password_path('user') %>
+						</li>
+						<li>
+							<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
+						</li>
 						<% else %>
-							<% if current_user.user_info.admin  %>
-								<li><a href="/admin">Admin</a></li>
-							<% end %>
-							<li><%= link_to "Profile", :controller => "UserInfos", :action => "edit_profile" %></li>
-							<li><%= link_to "Log Out", :controller => "sessions", :action => "destroy" %></li>
+						<% if current_user.user_info.admin  %>
+						<li><a href="/admin">Admin</a></li>
+						<% end %>
+						<li><%= link_to "Profile", :controller => "UserInfos", :action => "edit_profile" %></li>
+						<li><%= link_to 'Account', edit_user_registration_path %></li>
+						<li><%= link_to "Log Out", :controller => "sessions", :action => "destroy" %></li>
 						<% end %> 
-					</ul>					
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -50,9 +54,9 @@
 		<%= yield %>	
 	</div>
 	<div class='row'>
-	<div class='span12'><b>
-		<br><br><br><br><br><br>
-	</b></div>
-</div>
+		<div class='span12'><b>
+			<br><br><br><br><br><br>
+		</b></div>
+	</div>
 </body>
 </html>
