@@ -1,18 +1,29 @@
 <%= stylesheet_link_tag "user_infos" %>
-
+<style type="text/css">
+	.field_with_errors
+	{
+		display: inline-block;
+	}
+</style>
 <div id='info_form' class='panel' style='width: 420px;padding: 50px 50px 10px;'>
 	<div>
 		<h2>Forgot your password?</h2>
 	</div>
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-	<%= devise_error_messages! %>
+	
 	<br>
+
+	<% if devise_error_messages! != "" %>
 	<center>
-		<b style='position: relative;top: -4px;'>
-			E-Mail&nbsp&nbsp
-		</b>
-		<%= f.email_field :email, :autofocus => true, :placeholder => 'E-Mail' %>
-		<br><br>
+		<p>Sorry, we don't know this e-mail</p>
+	</center>
+	<% end %>
+	<center>
+		<div>
+			<b style='position: relative;top: -4px;'>E-Mail</b>
+			<%= f.email_field :email, :autofocus => true, :placeholder => 'E-Mail' %>
+		</div>
+		<br>
 		<%= f.submit "Submit", :class => 'btn btn-primary' %>
 	</center>
 	<% end %>
