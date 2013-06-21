@@ -32,3 +32,5 @@ gem 'aws-sdk'
 #Shopify
 gem 'shopify_api'
 gem 'unicorn'
+
+gem 'newrelic_rpm'
