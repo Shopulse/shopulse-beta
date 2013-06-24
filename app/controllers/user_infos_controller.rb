@@ -1,5 +1,5 @@
 class UserInfosController < ApplicationController
-	skip_before_filter :authenticate, :only => :merchant_agreement
+	skip_before_filter :authenticate, :only => [:merchant_agreement, :boutique]
 	before_filter :admin_check, :only => :admin
 	
 	private
@@ -33,6 +33,10 @@ class UserInfosController < ApplicationController
 	end
 
 	def admin
+
+	end
+
+	def boutique
 
 	end
 end

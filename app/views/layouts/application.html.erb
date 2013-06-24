@@ -33,9 +33,9 @@
 						<li>
 							<%= link_to "Forgot Password?", new_password_path('user') %>
 						</li>
-						<li>
+						<!-- <li>
 							<%= link_to "Sign Up", :controller => "registrations", :action => "new" %>
-						</li>
+						</li> -->
 						<% else %>
 						<% if current_user.user_info.admin  %>
 						<li><a href="/admin">Admin</a></li>
