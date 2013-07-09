@@ -80,7 +80,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 	</tbody>
 </table>
 <p style='text-align:right'>
-	<% if @admin == true %>
+	<% if @admin == true && retailer != nil %>
 	<%= link_to "Add product", {:controller => 'products', :action => 'new', :id => retailer.id}, :class => 'btn btn-primary'%>
 	<% else %>
 	<%= link_to "Add product", new_product_path, :class => 'btn btn-primary' %>
