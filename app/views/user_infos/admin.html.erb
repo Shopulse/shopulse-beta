@@ -41,6 +41,7 @@ user_cnt = UserInfo.count
 	</div>
 </div>
 <br><br>
+
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -53,6 +54,7 @@ user_cnt = UserInfo.count
 			<th><%= UserInfo.human_attribute_name(:country) %></th>
 			<th><%= UserInfo.human_attribute_name(:phone) %></th>
 			<th>Products</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -67,6 +69,12 @@ user_cnt = UserInfo.count
 			<td><%= user.country %></td>
 			<td><%= user.phone %></td>
 			<td style='text-align: center'><%= user.products.count %></td>
+			<td>
+				<%= link_to "delete", {:controller => "registrations", :action => "destroy", :id => user.id }, 
+				:method => :delete,
+				:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+				:class => 'btn btn-mini btn-danger' %>
+			</td>
 		</tr>
 		<% end %>
 	</tbody>

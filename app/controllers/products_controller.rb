@@ -2,13 +2,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    user = current_user.user_info
+    user = current_user.user_info    
     @products = user.products
     if user.admin
       @products = Product.all 
       @admin = true
     end
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
