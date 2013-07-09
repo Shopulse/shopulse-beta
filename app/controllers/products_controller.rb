@@ -58,11 +58,17 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     remove_empty_image params[:product][:photos_attributes]
-    puts params[:product]
+    
+    user_info = current_user.user_info
+    if user_info.admin
+      user_info = UserInfo.find params[:product][:user_id].to_i
+      params[:product].delete :user_id
+    end
+
     @product = Product.new(params[:product])        
     respond_to do |format|
       if @product.save
-        current_user.user_info.products.push @product
+        user_info.products.push @product
         Shopify.create @product
         format.html { redirect_to :action => 'index' }
         format.json { render json: @product, status: :created, location: @product }

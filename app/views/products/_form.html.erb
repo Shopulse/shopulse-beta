@@ -20,8 +20,11 @@
   </div>
 </div>
 
-
 <%= form_for @product, :html => { :class => 'form-horizontal', :multipart => :true} do |f| %> 
+<% if current_user.user_info.admin %>
+<%= f.hidden_field :user_id, :value => params[:id] %>
+<% end %>
+
 <div class='row'>
   <div class='span10 header'>
     <h5>Informations</h5>

@@ -54,7 +54,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 		<% @products.each do |product| %>
 		<tr>
 			<% if @admin %>
-				<% retailer = UserInfo.find(product.user_info_id) if retailer == nil%>
+				<% retailer = UserInfo.find(product.user_info_id) %>
 				<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
 			<% end %>
 
