@@ -15,7 +15,7 @@ class UserInfosController < ApplicationController
 		@user_info = current_user.user_info
 		@admin = false
 		if @user_info.admin
-			@user_info = UserInfo.find params[:id] if @user_info.admin
+			@user_info = UserInfo.find params[:id] if @user_info.admin && params[:id]
 			@admin = true
 		end
 	end
@@ -32,10 +32,8 @@ class UserInfosController < ApplicationController
 		end
 
 		respond_to do |format|
-			if user_info.update_attributes params[:user_info]
-				format.html { 
-					redirect_to :controller => "products", :action => "retailer", :id => user_info.id
-				}
+			if user_info.update_attributes params[:user_info]			
+				format.html { redirect_to '/' }
 			else
 				format.html { render action: "edit_profile" }
 			end

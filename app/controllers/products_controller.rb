@@ -68,12 +68,11 @@ class ProductsController < ApplicationController
 			if @product.save
 				user_info.products.push @product
 				Shopify.create @product
-				if admin == true
+				if admin
 					format.html { redirect_to :action => 'retailer', :id => user_info.id }  
 				else          
 					format.html { redirect_to :action => 'index' }
-				end
-				format.json { render json: @product, status: :created, location: @product }
+				end				
 			else
 				format.html { render action: "new" }
 				format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -97,11 +96,13 @@ class ProductsController < ApplicationController
 		respond_to do |format|
 			if product.update_attributes(params[:product])
 				product.photos.delete_if { |x| x.photo_file_name == nil }
-				product.save
-				Shopify.modify product
-				if 
-					format.html { redirect_to :action => 'index' }
-					format.json { head :no_content }
+				product.save				
+				if Shopify.modify product
+					if user.admin
+						format.html { redirect_to :action => 'retailer', :id => product.user_info_id }
+					else
+						format.html { redirect_to :action => 'index' }
+					end
 				else
 					format.html { render action: "edit" }
 					format.json { render json: product.errors, status: :unprocessable_entity }
