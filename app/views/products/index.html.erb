@@ -51,6 +51,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 		</tr>
 	</thead>
 	<tbody>
+		<% @products = [] if @products == nil %>
 		<% @products.each do |product| %>
 		<tr>
 			<% if @admin %>

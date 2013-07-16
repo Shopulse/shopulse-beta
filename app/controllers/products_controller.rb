@@ -1,17 +1,41 @@
 class ProductsController < ApplicationController
+
 	# GET /products
 	# GET /products.json
 	def index
-		user = current_user.user_info    
+		user = current_user.user_info 
 		@products = user.products
+
+		redirect = false
+		@products.each do |p|
+			if !p.complete_product?
+				if URI(request.referer).path != '/products/uncomplete_product_list'
+					redirect = true
+					redirect_to action: "uncomplete_product_list" 
+				end
+				break
+			end
+		end
+
 		if user.admin
 			@products = Product.all 
 			@admin = true
 		end
 
+		if redirect == false
+			respond_to do |format|
+				format.html # index.html.erb
+				format.json { render json: @products }
+			end
+		end
+	end
+
+	def uncomplete_product_list
+		user = current_user.user_info 
+		@products = user.products.select { |x| !x.complete_product? }
+
 		respond_to do |format|
-			format.html # index.html.erb
-			format.json { render json: @products }
+			format.html
 		end
 	end
 
@@ -96,16 +120,19 @@ class ProductsController < ApplicationController
 		respond_to do |format|
 			if product.update_attributes(params[:product])
 				product.photos.delete_if { |x| x.photo_file_name == nil }
-				product.save				
-				if Shopify.modify product
+				product.save
+
+				if product.shopify_id == nil
+					Shopify.create product
+				elsif Shopify.modify product
 					if user.admin
 						format.html { redirect_to :action => 'retailer', :id => product.user_info_id }
 					else
 						format.html { redirect_to :action => 'index' }
 					end
 				else
-					format.html { render action: "edit" }
-					format.json { render json: product.errors, status: :unprocessable_entity }
+					# format.html { render action: "edit" }
+					render json: product.errors, status: :unprocessable_entity
 				end
 			end
 		end

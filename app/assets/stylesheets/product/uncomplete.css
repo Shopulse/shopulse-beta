@@ -1,0 +1,9 @@
+.panel
+{
+	text-align: left;
+	display: block;
+	border-radius: 10px;
+	padding: 20px 50px;
+	background-color: rgba(255, 255, 255, 0.8);
+	width: 500px;
+}

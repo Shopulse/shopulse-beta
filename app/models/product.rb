@@ -7,4 +7,12 @@ class Product < ActiveRecord::Base
 
 	has_many :photos
 	accepts_nested_attributes_for :photos, :allow_destroy => true
+
+	def complete_product?
+		list = self.attribute_names - ['gender']
+		list.each do |key|
+			return false if self[key] == nil || self[key] == ""
+		end
+		return true
+	end
 end

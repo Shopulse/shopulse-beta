@@ -1,4 +1,6 @@
 ShopulseBeta::Application.routes.draw do
+
+	get '/products/uncomplete_product_list', :to => 'products#uncomplete_product_list'
 	resources :products
 
 	devise_for :users, :controllers => {:sessions => 'sessions', :registrations => 'registrations', :passwords => 'passwords'} do
@@ -9,5 +11,8 @@ ShopulseBeta::Application.routes.draw do
 	
 	get '/admin', :to => 'user_infos#admin'
 	get '/boutique', :to => 'user_infos#boutique'
+	
+	# get '/products/uncomplete_product_list', :to => 'products#uncomplete_product_list'
+
 	match ':controller(/:action(/:id))(.:format)'
 end
