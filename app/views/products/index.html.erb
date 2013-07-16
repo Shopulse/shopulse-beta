@@ -54,16 +54,26 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 		<% @products.each do |product| %>
 		<tr>
 			<% if @admin %>
-				<% retailer = UserInfo.find(product.user_info_id) %>
-				<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
+			<% retailer = UserInfo.find(product.user_info_id) %>
+			<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
 			<% end %>
 
+			<% if product.name.length > 0 %>
 			<td><%= link_to product.name, product_path(product), :target => "_blank" %></td>
+			<% else %>
+			<td><%= link_to "-", product_path(product), :target => "_blank" %></td>
+			<% end %>
+
 			<td><%= product.price %></td>
 			<td><%= product.sale_price %></td>
 			<td><%= product.brand %></td>
+			<% if product.product_type.length > 0 %>
 			<td><%= product.product_type.split("_")[0].capitalize %></td>
 			<td><%= product.product_type.split("_")[1] %></td>
+			<% else %>
+			<td>-</td>
+			<td>-</td>
+			<% end %> 
 			<!-- <td><%=l product.created_at %></td> -->
 			<td>
 				<%= link_to "View", product_path(product), :class => 'btn btn-mini', :target => "_blank" %>

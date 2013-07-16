@@ -22,19 +22,23 @@ function set_product_type()
 	c = val.split("_")[1];
 	name = val.split("_")[2];
 
-	type_gender(g);	
-
-	for(i=0 ; i<dic[g].length ; i++)
+	console.log(g);
+	if(g != "")
 	{
-		c = dic[g][i];
-		for(k=0 ; k<dic[g][c].length ; k++)
-		{			
-			if(name == dic[g][c][k])
-			{				
-				type_category(g, c);
-				type_name(g, dic[g][c][k]);
-				i = dic[g].length;
-				break;
+		type_gender(g);
+
+		for(i=0 ; i<dic[g].length ; i++)
+		{
+			c = dic[g][i];
+			for(k=0 ; k<dic[g][c].length ; k++)
+			{			
+				if(name == dic[g][c][k])
+				{				
+					type_category(g, c);
+					type_name(g, dic[g][c][k]);
+					i = dic[g].length;
+					break;
+				}
 			}
 		}
 	}
