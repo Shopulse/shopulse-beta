@@ -1,7 +1,15 @@
 class ProductsController < ApplicationController
 
+	private
+	def valid_url uri
+		!!URI.parse(uri)
+	rescue URI::InvalidURIError
+		false
+	end
+
 	# GET /products
 	# GET /products.json
+	public
 	def index
 		user = current_user.user_info 
 		@products = user.products
@@ -9,7 +17,7 @@ class ProductsController < ApplicationController
 		redirect = false
 		@products.each do |p|
 			if !p.complete_product?
-				if URI(request.referer).path != '/products/uncomplete_product_list'
+				if valid_url(request.referer) && URI(request.referer).path != '/products/uncomplete_product_list'
 					redirect = true
 					redirect_to action: "uncomplete_product_list" 
 				end
