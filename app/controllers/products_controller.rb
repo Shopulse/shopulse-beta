@@ -99,8 +99,8 @@ class ProductsController < ApplicationController
 		respond_to do |format|
 			if @product.save
 				user_info.products.push @product
-				Shopify.create @product if product.complete_product?
-				if admin
+				Shopify.create @product if @product.complete_product?
+				if admin == true
 					format.html { redirect_to :action => 'retailer', :id => user_info.id }  
 				else          
 					format.html { redirect_to :action => 'index' }
@@ -130,14 +130,10 @@ class ProductsController < ApplicationController
 				product.photos.delete_if { |x| x.photo_file_name == nil }
 				product.save
 
-				if product.shopify_id == nil && product.complete_product?
+				if product.shopify_id == nil && product.complete_product? == true
 					Shopify.create product
-				elsif Shopify.modify product
-					if user.admin
-						format.html { redirect_to :action => 'retailer', :id => product.user_info_id }
-					else
-						format.html { redirect_to :action => 'index' }
-					end
+				elsif product.shopify_id != nil && Shopify.modify(product)
+					redirect_to :action => 'index'
 				else
 					# format.html { render action: "edit" }
 					render json: product.errors, status: :unprocessable_entity
@@ -162,10 +158,10 @@ class ProductsController < ApplicationController
 
 	def retailer
 		user = current_user.user_info
-		redirect_to "/" if !user.admin
+		redirect_to "/" if user.admin != true
 		@products = UserInfo.find(params[:id]).products
 		@admin = true
-		render :action => "index"
+		render :index
 	end
 	
 	def remove_empty_image list
