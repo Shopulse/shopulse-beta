@@ -99,7 +99,7 @@ class ProductsController < ApplicationController
 		respond_to do |format|
 			if @product.save
 				user_info.products.push @product
-				Shopify.create @product
+				Shopify.create @product if product.complete_product?
 				if admin
 					format.html { redirect_to :action => 'retailer', :id => user_info.id }  
 				else          
@@ -130,7 +130,7 @@ class ProductsController < ApplicationController
 				product.photos.delete_if { |x| x.photo_file_name == nil }
 				product.save
 
-				if product.shopify_id == nil
+				if product.shopify_id == nil && product.complete_product?
 					Shopify.create product
 				elsif Shopify.modify product
 					if user.admin
