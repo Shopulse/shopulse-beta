@@ -1,0 +1,14 @@
+dic = {}
+dic['men'] = ['Clothing', 'Shoes', 'Accessories']
+
+dic['men']['Clothing'] = ['Blazers','Coats and jackets','Casual shirts','Formal shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear']
+dic['men']['Shoes'] = ['Boat shoes','Boots','Derbies','Espadrilles','Loafers','Oxfords','Sandals','Shoe accessories','Slippers','Sneakers']
+dic['men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewellery','Pocket squares','Scarves','Socks','Sunglasses','Ties','Travel','Wallets','Watches']
+
+
+
+dic['women'] =  ['Clothing', 'Shoes', 'Bags', 'Accessories']
+dic['women']['Clothing'] = ['Dresses','Tops','Jackets, Blazers & Vests','Sweaters','Denim','Pants, Shorts & Jumpsuits','Leggings','Skirts','Suits','Swimwear','Outerwear','Lingerie','Sleepwear & Loungewear']
+dic['women']['Shoes'] = ['Boots','Flat shoes','Pumps','Sandals','Sneakers']
+dic['women']['Bags'] = ['Clutch Bags','Shoulder Bags','Tote Bags','Travel Bags']
+dic['women']['Accessories'] = ['Belts','Jewelry','Hat','Scarves','Sunglasses','Travel','Wallets','Watches']
