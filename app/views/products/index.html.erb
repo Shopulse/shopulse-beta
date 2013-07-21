@@ -40,6 +40,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<% if @admin == true %>
 			<th>Retailer</th>
 			<% end %>
+			<th>Picture</th>
 			<th><%= model_class.human_attribute_name(:name) %></th>
 			<th><%= model_class.human_attribute_name(:price) %></th>
 			<th><%= model_class.human_attribute_name(:sale_price) %></th>
@@ -58,6 +59,8 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<% retailer = UserInfo.find(product.user_info_id) %>
 			<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
 			<% end %>
+
+			<td><%= image_tag product.photos.first.photo.url :thumb if product.photos.first %></td>
 
 			<% if product.name.length > 0 %>
 				<td><%= link_to product.name, product_path(product), :target => "_blank" %></td>
