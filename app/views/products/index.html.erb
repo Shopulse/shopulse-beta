@@ -80,9 +80,10 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<td>-</td>
 			<td>-</td>
 			<% end %> 
-			<!-- <td><%=l product.created_at %></td> -->
 			<td>
-				<%= link_to "View", product_path(product), :class => 'btn btn-mini', :target => "_blank" %>
+				<% if product.shopify_id != nil %>
+					<%= link_to "View", product_path(product), :class => 'btn btn-mini', :target => "_blank" %>
+				<% end %>
 				<%= link_to t('.edit', :default => t("helpers.links.edit")),
 				edit_product_path(product), :class => 'btn btn-mini' %>
 				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
