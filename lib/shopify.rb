@@ -130,7 +130,7 @@ class Shopify
 			var[:inventory_management] = "shopify"
 			var[:inventory_quantity] = inventory[size].to_i
 			var[:compare_at_price] = product.price
-			var[:price] = product.sale_price
+			var[:price] = product.sale_price * 1.029
 			var[:sku] = vendor+"-"+product.name+"-"+size
 			var_list.push var
 		end
