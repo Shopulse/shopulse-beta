@@ -67,7 +67,7 @@ class Shopify
 		var_id_list = []
 		p.variants.map { |x| var_id_list.push x.id }
 
-		tags = product.product_type.split("_").reverse
+		tags = product.product_type.split("_").reverse		
 		tags.pop
 		p.update_attributes ({
 			:body_html => product_description(product, user),
@@ -81,7 +81,7 @@ class Shopify
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
 			:product_type => tags.first,
-			:tags => tags.to_s
+			:tags => tags.join ","
 		})		
 		puts p.errors.messages if p.errors.messages != nil
 		p.save
