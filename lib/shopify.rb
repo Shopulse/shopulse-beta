@@ -81,7 +81,7 @@ class Shopify
 			:inventory_management => "shopify",
 			:options => [{ :name => "Size" }],
 			:product_type => tags.first,
-			:tags => tags.join ","
+			:tags => tags.join(",")
 		})		
 		puts p.errors.messages if p.errors.messages != nil
 		p.save
@@ -100,7 +100,6 @@ class Shopify
 	end
 
 	private
-
 	def self.create_variant product, vendor
 		inventory = JSON.parse(product.sizes)
 		var_list = []
