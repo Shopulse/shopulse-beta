@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 	accepts_nested_attributes_for :photos, :allow_destroy => true
 
 	def complete_product?
-		list = self.attribute_names - ['gender']
+		list = self.attribute_names - ['gender', 'shopify_id']
 		list.each do |key|
 			return false if self[key] == nil || self[key] == ""
 		end
