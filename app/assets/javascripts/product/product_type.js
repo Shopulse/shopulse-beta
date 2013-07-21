@@ -15,6 +15,10 @@ dic['Women']['Shoes'] = ['Boots','Flat shoes','Pumps','Sandals','Sneakers'];
 dic['Women']['Bags'] = ['Clutch Bags','Shoulder Bags','Tote Bags','Travel Bags'];
 dic['Women']['Accessories'] = ['Belts','Jewelry','Hat','Scarves','Sunglasses','Travel','Wallets','Watches'];
 
+$(document).ready(function(){
+	$('.dropdown-toggle').dropdown();
+});
+
 function set_product_type()
 {
 	val = $('#product_product_type').val();
