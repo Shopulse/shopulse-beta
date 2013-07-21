@@ -135,7 +135,7 @@ class ProductsController < ApplicationController
 					Shopify.create product
 				elsif product.shopify_id != nil && Shopify.modify(product)
 					puts "modified Shopify Product " + product.id.to_s
-					redirect_to :action => 'index'
+					format.html { render action: "index" }
 				else
 					format.html { render action: "index" }
 					format.json { render json: product.errors, status: :unprocessable_entity }
