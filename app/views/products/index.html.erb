@@ -60,7 +60,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
 			<% end %>
 
-			<td><%= image_tag product.photos.first.photo.url :thumb if product.photos.first %></td>
+			<td><%= image_tag product.photos.first.photo.url "thumb" if product.photos.first %></td>
 
 			<% if product.name.length > 0 %>
 				<td><%= link_to product.name, product_path(product), :target => "_blank" %></td>
