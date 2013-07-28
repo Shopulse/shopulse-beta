@@ -9,7 +9,7 @@
 		<% @products = [] if @products == nil %>
 		<% @products.each do |product| %>
 		<tr>
-			<td><%= image_tag product.photos.first.photo.url :thumb if product.photos.first %></td>
+			<td><%= image_tag product.photos.find { |x| x.photo_content_type != nil }.photo.url "thumb" if product.photos.first %></td>
 
 			<% if product.name.length > 0 %>
 				<td><%= link_to product.name, edit_product_path(product) %></td>
