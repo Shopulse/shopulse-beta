@@ -3,7 +3,7 @@ var gender = 'none';
 
 dic['Men'] = ['Clothing', 'Shoes', 'Accessories'];
 
-dic['Men']['Clothing'] = ['Blazers','Coats','Jackets','Casual-shirts','Formal-shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
+dic['Men']['Clothing'] = ['Blazers','Coats','Jackets','Shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
 dic['Men']['Shoes'] = ['Boat shoes','Boots','Derbies','Espadrilles','Loafers','Oxfords','Sandals','Shoe accessories','Slippers','Sneakers'];
 dic['Men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewellery','Pocket squares','Scarves','Socks','Sunglasses','Ties','Travel','Wallets','Watches'];
 
