@@ -3,7 +3,7 @@ var gender = 'none';
 
 dic['Men'] = ['Clothing', 'Shoes', 'Accessories'];
 
-dic['Men']['Clothing'] = ['Blazers','Coats and jackets','Casual shirts','Formal shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
+dic['Men']['Clothing'] = ['Blazers','Coats','Jackets','Casual-shirts','Formal-shirts','Jeans','Knitwear','Polos','Shorts','Activewear','Suits','Sweats','Swimwear','T-shirts','Trousers','Tuxedos','Underwear'];
 dic['Men']['Shoes'] = ['Boat shoes','Boots','Derbies','Espadrilles','Loafers','Oxfords','Sandals','Shoe accessories','Slippers','Sneakers'];
 dic['Men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewellery','Pocket squares','Scarves','Socks','Sunglasses','Ties','Travel','Wallets','Watches'];
 
@@ -11,8 +11,8 @@ dic['Men']['Accessories'] =['Bags','Belts','Cufflinks','Tie clips','Hats','Jewel
 
 dic['Women'] =  ['Clothing', 'Shoes', 'Bags', 'Accessories'];
 dic['Women']['Clothing'] = ['Dresses','Tops','Jackets','Blazers','Vests','Sweaters','Denim','Pants','Shorts','Jumpsuits','Leggings','Skirts','Suits','Swimwear','Outerwear','Lingerie','Sleepwear','Loungewear'];
-dic['Women']['Shoes'] = ['Boots','Flat shoes','Pumps','Sandals','Sneakers'];
-dic['Women']['Bags'] = ['Clutch Bags','Shoulder Bags','Tote Bags','Travel Bags'];
+dic['Women']['Shoes'] = ['Boots','Flat-shoes','Pumps','Sandals','Sneakers'];
+dic['Women']['Bags'] = ['Clutch-Bags','Shoulder-Bags','Tote-Bags','Travel-Bags'];
 dic['Women']['Accessories'] = ['Belts','Jewelry','Hat','Scarves','Sunglasses','Travel','Wallets','Watches'];
 
 $(document).ready(function(){
