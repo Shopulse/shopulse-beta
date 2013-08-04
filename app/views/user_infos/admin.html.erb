@@ -4,12 +4,20 @@
 p_cnt = Product.count 
 order_cnt = ShopifyAPI::Order.count
 user_cnt = UserInfo.count
+
+quantity = 0
+p_list = ShopifyAPI::Product.all
+p_list.each do |x|
+	x.variants.each do |v|
+		quantity += v.inventory_quantity
+	end
+end
 %>
 
 <br><br>
 
 <div class='row-fluid'>
-	<div class='span4' style='text-align: center'>
+	<div class='span3' style='text-align: center'>
 		<div class='circle' style='width: 250px; height: 250px;'>
 			<div style='margin-top: 100px'>
 				<b><%= user_cnt %></b>
@@ -18,7 +26,7 @@ user_cnt = UserInfo.count
 			</div>
 		</div>
 	</div>
-	<div class='span4' style='text-align: center'>
+	<div class='span3' style='text-align: center'>
 		<div class='circle' style='width: 250px; height: 250px;'>
 			<div style='margin-top: 100px'>
 				<b><%= p_cnt %></b>
@@ -27,7 +35,7 @@ user_cnt = UserInfo.count
 			</div>
 		</div>
 	</div>
-	<div class='span4' style='text-align: center'>
+	<div class='span3' style='text-align: center'>
 		<div class='circle' style='width: 250px; height: 250px;'>
 			<div style='margin-top: 105px'>				
 				
@@ -36,6 +44,18 @@ user_cnt = UserInfo.count
 				<b><%= order_cnt %></b>
 				<br><br>
 				<b style='font-size: 12px'>Order<%= 's' if order_cnt > 1 %></b>
+			</div>
+		</div>
+	</div>
+	<div class='span3' style='text-align: center'>
+		<div class='circle' style='width: 250px; height: 250px;'>
+			<div style='margin-top: 105px'>				
+				
+			</div>
+			<div style='margin-top: 100px'>
+				<b><%= quantity %></b>
+				<br><br>
+				<b style='font-size: 12px'>products in stock</b>
 			</div>
 		</div>
 	</div>
