@@ -1,7 +1,7 @@
 <%- model_class = Product -%>
 
-<% 
-retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil	
+<%
+retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 %>
 
 <!-- <div class="page-header">
@@ -13,8 +13,8 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 <h1>
 	<%= retailer.name %>
 	<div style='float: right'>
-		<%= link_to "Edit  Boutique Information", {:controller => "UserInfos", :action => "edit_profile", :id => retailer.id}, 
-		:class => 'btn btn-primary' %>		
+		<%= link_to "Edit  Boutique Information", {:controller => "UserInfos", :action => "edit_profile", :id => retailer.id},
+		:class => 'btn btn-primary' %>
 	</div>
 </h1>
 <div class='row-fluid' style='line-height: 200%'>
@@ -45,7 +45,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<th><%= model_class.human_attribute_name(:price) %></th>
 			<th><%= model_class.human_attribute_name(:sale_price) %></th>
 			<th><%= model_class.human_attribute_name(:brand) %></th>
-			<th><%= model_class.human_attribute_name(:gender) %></th>      
+			<th><%= model_class.human_attribute_name(:gender) %></th>
 			<th><%= model_class.human_attribute_name(:product_type) %></th>
 			<!-- <th><%= model_class.human_attribute_name(:created_at) %></th> -->
 			<th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -60,7 +60,12 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<td><%= link_to retailer.name, :action => "retailer", :id => retailer.id %></td>
 			<% end %>
 
-			<td><%= image_tag product.photos.find { |x| x.photo_content_type != nil }.photo.url "thumb" if product.photos.first %></td>
+			<td>
+			<% if product.photos.length > 0 %>
+			<% image = product.photos.find {|x| x.photo_content_type != nil } %>
+			<%= image_tag image.photo.url "thumb" if image != nil %>
+			<% end %>
+			</td>
 
 			<% if product.name.length > 0 %>
 				<td><%= link_to product.name, product_path(product), :target => "_blank" %></td>
@@ -79,7 +84,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 			<% else %>
 			<td>-</td>
 			<td>-</td>
-			<% end %> 
+			<% end %>
 			<td>
 				<% if product.shopify_id != nil %>
 					<%= link_to "View", product_path(product), :class => 'btn btn-mini', :target => "_blank" %>
@@ -101,5 +106,5 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 	<%= link_to "Add product", {:controller => 'products', :action => 'new', :id => retailer.id}, :class => 'btn btn-primary'%>
 	<% else %>
 	<%= link_to "Add product", new_product_path, :class => 'btn btn-primary' %>
-	<% end %>	
+	<% end %>
 </p>
