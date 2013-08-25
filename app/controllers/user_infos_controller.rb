@@ -26,6 +26,7 @@ class UserInfosController < ApplicationController
 	end
 
 	def update
+		current_user.create_user_info if current_user.user_info == nil
 		user_info = current_user.user_info
 		if user_info.admin == true
 			user_info = UserInfo.find(params[:user_info][:user_id])
