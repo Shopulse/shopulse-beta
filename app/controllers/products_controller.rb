@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
 	# GET /products.json
 	public
 	def index
+		current_user.create_user_info if current_user.user_info == nil
 		user = current_user.user_info
 		@products = user.products
 
