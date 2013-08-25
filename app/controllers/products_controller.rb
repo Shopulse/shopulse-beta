@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 	# GET /products.json
 	public
 	def index
-		user = current_user.user_info 
+		user = current_user.user_info
 		@products = user.products
 
 		redirect = false

@@ -1,7 +1,7 @@
 class UserInfosController < ApplicationController
 	skip_before_filter :authenticate, :only => [:merchant_agreement, :boutique]
 	before_filter :admin_check, :only => :admin
-	
+
 	private
 	def admin_check
 		if current_user.user_info.admin == false
@@ -11,7 +11,8 @@ class UserInfosController < ApplicationController
 
 	public
 
-	def edit_profile		
+	def edit_profile
+		current_user.create_user_info if current_user.user_info == nil
 		@user_info = current_user.user_info
 		@admin = false
 		if @user_info.admin
@@ -24,7 +25,7 @@ class UserInfosController < ApplicationController
 
 	end
 
-	def update		
+	def update
 		user_info = current_user.user_info
 		if user_info.admin == true
 			user_info = UserInfo.find(params[:user_info][:user_id])
@@ -32,7 +33,7 @@ class UserInfosController < ApplicationController
 		end
 
 		respond_to do |format|
-			if user_info.update_attributes params[:user_info]			
+			if user_info.update_attributes params[:user_info]
 				format.html { redirect_to '/' }
 			else
 				format.html { render action: "edit_profile" }
