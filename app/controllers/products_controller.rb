@@ -15,13 +15,15 @@ class ProductsController < ApplicationController
 		@products = user.products
 
 		redirect = false
-		@products.each do |p|
-			if !p.complete_product?
-				if valid_url(request.referer) && URI(request.referer).path != '/products/uncomplete_product_list'
-					redirect = true
-					redirect_to action: "uncomplete_product_list" 
+		if @products
+			@products.each do |p|
+				if !p.complete_product?
+					if valid_url(request.referer) && URI(request.referer).path != '/products/uncomplete_product_list'
+						redirect = true
+						redirect_to action: "uncomplete_product_list" 
+					end
+					break
 				end
-				break
 			end
 		end
 
