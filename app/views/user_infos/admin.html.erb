@@ -22,7 +22,7 @@ end
 			<div style='margin-top: 100px'>
 				<b><%= user_cnt %></b>
 				<br><br>
-				<b style='font-size: 12px'>Boutique<%= 's' if UserInfo.count > 1 %></b>
+				<b style='font-size: 12px'>Designer<%= 's' if UserInfo.count > 1 %></b>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@ end
 			<div style='margin-top: 100px'>
 				<b><%= quantity %></b>
 				<br><br>
-				<b style='font-size: 12px'>products in stock</b>
+				<b style='font-size: 12px'>Products in stock</b>
 			</div>
 		</div>
 	</div>
@@ -65,7 +65,7 @@ end
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Boutiques</th>
+			<th>Designer</th>
 			<th><%= UserInfo.human_attribute_name(:email) %></th>
 			<th><%= UserInfo.human_attribute_name(:first_name) %></th>
 			<th><%= UserInfo.human_attribute_name(:last_name) %></th>

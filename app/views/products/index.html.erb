@@ -13,7 +13,7 @@ retailer = UserInfo.find(params[:id]) if @admin == true && params[:id] != nil
 <h1>
 	<%= retailer.name %>
 	<div style='float: right'>
-		<%= link_to "Edit  Boutique Information", {:controller => "UserInfos", :action => "edit_profile", :id => retailer.id},
+		<%= link_to "Edit  Designer Information", {:controller => "UserInfos", :action => "edit_profile", :id => retailer.id},
 		:class => 'btn btn-primary' %>
 	</div>
 </h1>

@@ -27,7 +27,6 @@ class Shopify
 	def self.product_description product, user
 		text = product.description.gsub("\r\n", "<br><br>")
 		text = text+"<br><br>Material: " + product.material if product.material != ""
-		text = text+"<br><br>This item will be shipped from a boutique in #{user.city}, #{user.province}, #{user.country}"
 	end
 
 	def self.create product
